@@ -1,0 +1,17 @@
+nick
+123456789
+
+py --version //python version
+py -m django startproject locallibrary // start the project
+py manage.py startapp catalog // create the app catalog
+or
+py -3 manage.py startapp catalog // // create the app catalog, with python 3
+
+//Chaque fois que vous ferez évoluer le modèle de données, vous devrez exécuter le commandes ci-dessus (elles seront traduites en structure dans la base de données que cela conduise à l'ajout ou au retrait d'objets ou d'attributs).
+py manage.py makemigrations
+py manage.py migrate
+
+//Pour démarrer le serveur local, il suffit d'exécuter la commande ci-dessous dans le répertoire du projet (dossier où se trouver manage.py) :
+py manage.py runserver
+
+python manage.py check --deploy //Check for deployment
