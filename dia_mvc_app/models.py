@@ -15,9 +15,6 @@ class Dossier(models.Model):
     identifiantCin_Nif = models.CharField(max_length=200, null=True, help_text='')
     
     
-    
-   
-
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
