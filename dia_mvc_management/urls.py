@@ -19,3 +19,21 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='/dia_mvc/', permanent=True)),
+]
+
+#L'extrait du code ci-dessous permet d'intégrer dans locallibrary/urls.py le configurateur d'url du module catalog
+# Use include() to add URLS from the catalog application and authentication system
+from django.urls import include
+urlpatterns += [
+    path('dia_mvc_app/', include('catalog.urls')),
+]
+
+#Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]

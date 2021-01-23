@@ -121,3 +121,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
+
+"""#You can change the behavior so the site will update the database/send cookie on every request by adding
+SESSION_SAVE_EVERY_REQUEST = True"""
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+
+"""The password reset system requires that your website supports email.
+This logs any emails sent to the console (so you can copy the password reset link from the console)."""
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
