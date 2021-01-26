@@ -1,3 +1,4 @@
+# Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
@@ -7,14 +8,14 @@ from datetime import date
 class Dossier(models.Model):
     """Table contenant des informations pour la création de dossiers virtuels pour les patients de la clinique."""
     #type = models.CharField(max_length=200, help_text='Edition du livre')
-   
+
     utilsateur  = models.OneToOneField(User, on_delete = models.CASCADE,
     primary_key = True, help_text='')
 
     addresse    = models.CharField(max_length=200, null=True,help_text='Numero, Rue')
     identifiantCin_Nif = models.CharField(max_length=200, null=True, help_text='')
-    
-    
+
+
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
@@ -26,9 +27,9 @@ class Dossier(models.Model):
 
 class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
-    
-    
+    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=False)
+
+
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
@@ -40,9 +41,9 @@ class Diagnostic(models.Model):
 
 class RendezVous(models.Model):
     """Table contenant des informations pour la configuration des rendez-vous"""
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
-    date_     = models.DateField(null=True, blank=True)
-    
+    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=False)
+    date     = models.DateField(null=True, blank=True)
+
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
@@ -55,10 +56,10 @@ class RendezVous(models.Model):
 class Prescription(models.Model):
     """Table contenant les prescriptions et les notes essentielles pour les patients."""
 
-   dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
-   ordonnance = models.CharField(max_length=500, help_text='')
-   notesImportantes = models.CharField(max_length=200, help_text='')
-    
+    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=False)
+    ordonnance = models.CharField(max_length=500, help_text='')
+    notesImportantes = models.CharField(max_length=200, help_text='')
+
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
