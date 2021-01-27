@@ -27,7 +27,7 @@ class Dossier(models.Model):
 
 class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=False)
+    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
 
 
     def __str__(self):
@@ -41,7 +41,7 @@ class Diagnostic(models.Model):
 
 class RendezVous(models.Model):
     """Table contenant des informations pour la configuration des rendez-vous"""
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=False)
+    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
     date     = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -56,7 +56,7 @@ class RendezVous(models.Model):
 class Prescription(models.Model):
     """Table contenant les prescriptions et les notes essentielles pour les patients."""
 
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=False)
+    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
     ordonnance = models.CharField(max_length=500, help_text='')
     notesImportantes = models.CharField(max_length=200, help_text='')
 
