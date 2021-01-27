@@ -7,6 +7,7 @@ authors = ["repl.it user <replituser@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 django = "^3.1.4"
+django-import-export = "^2.5.0"
 
 [tool.poetry.dev-dependencies]
 
