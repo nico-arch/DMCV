@@ -38,6 +38,21 @@ class Diagnostic(models.Model):
         #return '{0} ({1})'.format(self.id,self.book.title))
 
 
+class Prescription(models.Model):
+    """Table contenant les prescriptions et les notes essentielles pour les patients."""
+
+    diagnostic   = models.OneToOneField('Diagnostic', on_delete=models.CASCADE, primary_key = True, help_text='')
+    ordonnance = models.CharField(max_length=500, help_text='')
+    notesImportantes = models.CharField(max_length=200, help_text='')
+
+    def __str__(self):
+        """Cette fonction est obligatoirement requise par Django.
+           Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
+        #return self.nom
+        #return 'Dossier de {0}'.format(self.utilsateur.username)
+        #return '{0} ({1})'.format(self.id,self.book.title))
+
+
 
 class RendezVous(models.Model):
     """Table contenant des informations pour la configuration des rendez-vous"""
@@ -53,16 +68,3 @@ class RendezVous(models.Model):
 
 
 
-class Prescription(models.Model):
-    """Table contenant les prescriptions et les notes essentielles pour les patients."""
-
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
-    ordonnance = models.CharField(max_length=500, help_text='')
-    notesImportantes = models.CharField(max_length=200, help_text='')
-
-    def __str__(self):
-        """Cette fonction est obligatoirement requise par Django.
-           Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        #return self.nom
-        #return 'Dossier de {0}'.format(self.utilsateur.username)
-        #return '{0} ({1})'.format(self.id,self.book.title))
