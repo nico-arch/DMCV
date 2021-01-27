@@ -1,5 +1,5 @@
 """
-ASGI config for dmvc_management project.
+ASGI config for dmcv_manager project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dmvc_management.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dmcv_manager.settings')
 
 application = get_asgi_application()
