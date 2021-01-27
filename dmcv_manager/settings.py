@@ -119,3 +119,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+"""#You can change the behavior so the site will update the database/send cookie on every request by adding
+SESSION_SAVE_EVERY_REQUEST = True"""
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+
+"""The password reset system requires that your website supports email.
+This logs any emails sent to the console (so you can copy the password reset link from the console)."""
+
+"""if not DEBUG:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'e4f997f2a746a4'
+EMAIL_HOST_PASSWORD = '327296a9146ffd'
+EMAIL_PORT = '2525'
+else:"""
+EMAIL_BACKEND =("django.core.mail.backends.console.EmailBackend")
