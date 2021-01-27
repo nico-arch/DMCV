@@ -9,6 +9,6 @@ from .models import *
 class ViewAdmin(admin.ModelAdmin):
     pass
 
-admin.site.site_header = 'DMCV Administration Panel'
+admin.site.site_header = "Panneau d'administration DMCV"
 admin.site.site_title = 'DMCV'
-
+admin.site.index_title = "Administration"

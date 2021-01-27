@@ -104,8 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
 
+LANGUAGE_CODE = 'fr'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -129,11 +130,5 @@ LOGIN_REDIRECT_URL = '/'
 """The password reset system requires that your website supports email.
 This logs any emails sent to the console (so you can copy the password reset link from the console)."""
 
-"""if not DEBUG:
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = 'e4f997f2a746a4'
-EMAIL_HOST_PASSWORD = '327296a9146ffd'
-EMAIL_PORT = '2525'
-else:"""
+
 EMAIL_BACKEND =("django.core.mail.backends.console.EmailBackend")
