@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date, timedelta
+from django.utils import timezone
 
 import datetime
 import dateutil
@@ -16,7 +17,7 @@ class Dossier(models.Model):
     utilsateur  = models.OneToOneField(User, on_delete = models.CASCADE,
     primary_key = True, help_text='')
 
-    dateDeNaissance = models.DateField('Date de naissance', null=True, blank=True)
+    dateDeNaissance = models.DateField('Date de naissance', default=timezone.now, null=True, blank=True)
 
     SEX_VALUE = (
         ('0', 'M'),
@@ -28,7 +29,7 @@ class Dossier(models.Model):
         choices=SEX_VALUE,
         blank=True,
         default='0',
-        help_text='',
+        help_text='(1 = male; 0 = female)',
     ) 
     addresse    = models.CharField(max_length=200, null=True,help_text='Numero, Rue')
     identifiantCin_Nif = models.CharField('Cin ou Nif',max_length=200, null=True, help_text='')
@@ -47,9 +48,9 @@ class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
     dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
     
-    age = (date.today() - dossier.dateDeNaissance) // timedelta(days=365.2425)
+    #age = (date.today() - dossier.dateDeNaissance) // timedelta(days=365.2425)
     #age = birthday(dossier.age)
-    sex = dossier.sex
+    #sex = dossier.sex
 
     CP_VALUE = (
         ('0', 'Valeur: 0'),
@@ -61,23 +62,82 @@ class Diagnostic(models.Model):
         'Chest pain type',
         max_length=1,
         choices=CP_VALUE,
-        blank=True,
         default='0',
         help_text='(4 values)',
     ) 
-    #cp =models.CharField('Chest pain type', max_length=13, help_text='(4 values)')
-
     
-    trestbps = models.CharField('Resting blood pressure', max_length=13, help_text='')
-    chol = models.CharField('Serum cholestoral', max_length=13, help_text='mg/dl')
-    fbs = models.CharField('Fasting blood sugar', max_length=13, help_text='> 120 mg/dl')
-    restecg = models.CharField('Resting electrocardiographic results', max_length=13, help_text=' (values 0,1,2)')
-    thalach = models.CharField('Maximum heart rate achieved', max_length=13, help_text='')
-    exang = models.CharField('Exercise induced angina', max_length=13, help_text='')
-    oldpeak = models.CharField('Oldpeak', max_length=13, help_text='Oldpeak = ST depression induced by exercise relative to rest')
-    slope = models.CharField('Slope', max_length=13, help_text='The slope of the peak exercise ST segment')
-    ca = models.CharField('Number of major vessels', max_length=13, help_text='Number of major vessels (0-3) colored by flourosopy')
-    thal = models.CharField('Thal', max_length=13, help_text='Thal: 3 = normal; 6 = fixed defect; 7 = reversable defect')
+    trestbps = models.IntegerField(
+      'Resting blood pressure', 
+      default=130,
+      help_text='Resting blood pressure (in mm Hg on admission to the hospital)')
+
+
+    chol = models.IntegerField('Serum cholestoral',
+    default=131, 
+    help_text='mg/dl')
+
+    FBS_VALUE = (
+        ('1', '> 120 mg/dl'),
+        ('0', '<= 120 mg/dl'),
+    )
+    fbs = models.CharField(
+    'Fasting blood sugar',
+    default='0',
+    max_length=1,
+    help_text='(fasting blood sugar > 120 mg/dl) (1 = true; 0 = false)')
+    
+
+    RESTECG_VALUE = (
+        ('0', 'Niveau: 1'),
+        ('1', 'Niveau: 2'),
+        ('2', 'Niveau: 3'),
+    )
+    restecg = models.CharField(
+    'Resting electrocardiographic results',
+    default='0',
+    max_length=13,
+    help_text=' (values 0,1,2)')
+
+
+    thalach = models.IntegerField(
+    'Maximum heart rate achieved',
+    default=174,
+    help_text='')
+
+
+    EXANG_VALUE = (
+        ('1', 'Yes'),
+        ('0', 'NO'),
+    )
+    exang = models.CharField(
+    'Exercise induced angina',
+    default='0',
+    max_length=13,
+    help_text='exercise induced angina (1 = yes; 0 = no)')
+
+
+
+    oldpeak = models.CharField(
+    'Oldpeak',
+    max_length=13,
+    default='',
+    help_text='Oldpeak = ST depression induced by exercise relative to rest')
+
+    slope = models.CharField(
+    'Slope',default='',
+    max_length=13,
+    help_text='The slope of the peak exercise ST segment')
+
+    ca = models.CharField(
+    'Number of major vessels',
+    default='',
+    max_length=13,
+    help_text='Number of major vessels (0-3) colored by flourosopy')
+
+    thal = models.CharField(
+    'Thal',default='',
+    max_length=13, 
+    help_text='Thal: 3 = normal; 6 = fixed defect; 7 = reversable defect')
 
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
