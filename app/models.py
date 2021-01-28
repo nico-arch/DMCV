@@ -14,10 +14,16 @@ class Dossier(models.Model):
     """Table contenant des informations pour la création de dossiers virtuels pour les patients de la clinique."""
     #type = models.CharField(max_length=200, help_text='Edition du livre')
 
-    utilsateur  = models.OneToOneField(User, on_delete = models.CASCADE,
+    utilsateur  = models.OneToOneField(
+    User,
+    on_delete = models.CASCADE,
     primary_key = True, help_text='')
 
-    dateDeNaissance = models.DateField('Date de naissance', default=timezone.now, null=True, blank=True)
+    dateDeNaissance = models.DateField(
+    'Date de naissance',
+    default=timezone.now,
+    null=True,
+    blank=True)
 
     SEX_VALUE = (
         ('0', 'M'),
@@ -30,9 +36,17 @@ class Dossier(models.Model):
         blank=True,
         default='0',
         help_text='(1 = male; 0 = female)',
-    ) 
-    addresse    = models.CharField(max_length=200, null=True,help_text='Numero, Rue')
-    identifiantCin_Nif = models.CharField('Cin ou Nif',max_length=200, null=True, help_text='')
+    )
+    addresse    = models.CharField(
+    max_length=200,
+    null=True,
+    help_text='Numero, Rue')
+
+    identifiantCin_Nif = models.CharField(
+    'Cin ou Nif',
+    max_length=200,
+    null=True,
+    help_text='')
 
 
     def __str__(self):
@@ -47,7 +61,7 @@ class Dossier(models.Model):
 class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
     dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
-    
+
     #age = (date.today() - dossier.dateDeNaissance) // timedelta(days=365.2425)
     #age = birthday(dossier.age)
     #sex = dossier.sex
@@ -64,16 +78,16 @@ class Diagnostic(models.Model):
         choices=CP_VALUE,
         default='0',
         help_text='(4 values)',
-    ) 
-    
+    )
+
     trestbps = models.IntegerField(
-      'Resting blood pressure', 
+      'Resting blood pressure',
       default=130,
       help_text='Resting blood pressure (in mm Hg on admission to the hospital)')
 
 
     chol = models.IntegerField('Serum cholestoral',
-    default=131, 
+    default=131,
     help_text='mg/dl')
 
     FBS_VALUE = (
@@ -86,7 +100,7 @@ class Diagnostic(models.Model):
     max_length=13,
     choices=FBS_VALUE,
     help_text='(fasting blood sugar > 120 mg/dl) (1 = true; 0 = false)')
-    
+
 
     RESTECG_VALUE = (
         ('0', 'Niveau: 1'),
@@ -162,7 +176,7 @@ class Diagnostic(models.Model):
     'Thal',
     default='2',
     choices=THAL_VALUE,
-    max_length=13, 
+    max_length=13,
     help_text='Thal: 3 = normal; 6 = fixed defect; 7 = reversable defect')
 
     def __str__(self):
@@ -212,6 +226,3 @@ class RendezVous(models.Model):
         #return self.nom
         return 'RendezVous de :{0} ______ le : {1} (Année - Mois - Jour)'.format(self.dossier.utilsateur.username, self.date)
         #return '{0} ({1})'.format(self.id,self.book.title))
-
-
-
