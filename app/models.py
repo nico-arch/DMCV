@@ -1,7 +1,11 @@
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import date
+from datetime import date, timedelta
+
+import datetime
+import dateutil
+
 
 # Create your models here.
 
@@ -12,8 +16,22 @@ class Dossier(models.Model):
     utilsateur  = models.OneToOneField(User, on_delete = models.CASCADE,
     primary_key = True, help_text='')
 
+    dateDeNaissance = models.DateField('Date de naissance', null=True, blank=True)
+
+    SEX_VALUE = (
+        ('0', 'M'),
+        ('1', 'F'),
+    )
+    sex = models.CharField(
+        'Sexe',
+        max_length=1,
+        choices=SEX_VALUE,
+        blank=True,
+        default='0',
+        help_text='',
+    ) 
     addresse    = models.CharField(max_length=200, null=True,help_text='Numero, Rue')
-    identifiantCin_Nif = models.CharField(max_length=200, null=True, help_text='')
+    identifiantCin_Nif = models.CharField('Cin ou Nif',max_length=200, null=True, help_text='')
 
 
     def __str__(self):
@@ -28,7 +46,38 @@ class Dossier(models.Model):
 class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
     dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
+    
+    age = (date.today() - dossier.age) // timedelta(days=365.2425)
+    #age = birthday(dossier.age)
+    sex = dossier.sex
 
+    CP_VALUE = (
+        ('0', 'Valeur: 0'),
+        ('1', 'Valeur: 1'),
+        ('2', 'Valeur: 2'),
+        ('3', 'Valeur: 3'),
+    )
+    cp = models.CharField(
+        'Chest pain type',
+        max_length=1,
+        choices=CP_VALUE,
+        blank=True,
+        default='0',
+        help_text='(4 values)',
+    ) 
+    #cp =models.CharField('Chest pain type', max_length=13, help_text='(4 values)')
+
+    
+    trestbps = models.CharField('Resting blood pressure', max_length=13, help_text='')
+    chol = models.CharField('Serum cholestoral', max_length=13, help_text='mg/dl')
+    fbs = models.CharField('Fasting blood sugar', max_length=13, help_text='> 120 mg/dl')
+    restecg = models.CharField('Resting electrocardiographic results', max_length=13, help_text=' (values 0,1,2)')
+    thalach = models.CharField('Maximum heart rate achieved', max_length=13, help_text='')
+    exang = models.CharField('Exercise induced angina', max_length=13, help_text='')
+    oldpeak = models.CharField('Oldpeak', max_length=13, help_text='Oldpeak = ST depression induced by exercise relative to rest')
+    slope = models.CharField('Slope', max_length=13, help_text='The slope of the peak exercise ST segment')
+    ca = models.CharField('Number of major vessels', max_length=13, help_text='Number of major vessels (0-3) colored by flourosopy')
+    thal = models.CharField('Thal', max_length=13, help_text='Thal: 3 = normal; 6 = fixed defect; 7 = reversable defect')
 
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
@@ -37,6 +86,18 @@ class Diagnostic(models.Model):
         return 'Diagnostic de : {0}'.format(self.dossier.utilsateur.username)
         #return '{0} ({1})'.format(self.id,self.book.title))
 
+
+
+    def birthday(date):
+        # Get the current date
+        now = datetime.datetime.utcnow()
+        now = now.date()
+
+        # Get the difference between the current date and the birthday
+        age = dateutil.relativedelta.relativedelta(now, date)
+        age = age.years
+
+        return age
 
 class Prescription(models.Model):
     """Table contenant les prescriptions et les notes essentielles pour les patients."""
