@@ -20,7 +20,7 @@ class Dossier(models.Model):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
         #return self.nom
-        return 'Dossier de {0}'.format(self.utilsateur.username)
+        return 'Dossier de : {0}'.format(self.utilsateur.username)
         #return '{0} ({1})'.format(self.id,self.book.title))
 
 
@@ -34,7 +34,7 @@ class Diagnostic(models.Model):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
         #return self.nom
-        #return 'Dossier de {0}'.format(self.utilsateur.username)
+        return 'Diagnostic de : {0}'.format(self.dossier.utilsateur.username)
         #return '{0} ({1})'.format(self.id,self.book.title))
 
 
@@ -49,7 +49,7 @@ class Prescription(models.Model):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
         #return self.nom
-        #return 'Dossier de {0}'.format(self.utilsateur.username)
+        return 'Prescription de :{0}'.format(self.diagnostic.dossier.utilsateur.username)
         #return '{0} ({1})'.format(self.id,self.book.title))
 
 
@@ -63,7 +63,7 @@ class RendezVous(models.Model):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
         #return self.nom
-        #return 'Dossier de {0}'.format(self.utilsateur.username)
+        return 'RendezVous de :{0} ______ le : {1} (Année - Mois - Jour)'.format(self.dossier.utilsateur.username, self.date)
         #return '{0} ({1})'.format(self.id,self.book.title))
 
 
