@@ -140,9 +140,9 @@ class Diagnostic(models.Model):
     help_text='Oldpeak = ST depression induced by exercise relative to rest')
 
     SLOPE_VALUE = (
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
+        ('0', 'Valeur: 0'),
+        ('1', 'Valeur: 1'),
+        ('2', 'Valeur: 2'),
     )
 
     slope = models.CharField(
@@ -153,10 +153,10 @@ class Diagnostic(models.Model):
     help_text='The slope of the peak exercise ST segment')
 
     CA_VALUE = (
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
+        ('0', 'Valeur: 0'),
+        ('1', 'Valeur: 1'),
+        ('2', 'Valeur: 2'),
+        ('3', 'Valeur: 3'),
     )
 
     ca = models.CharField(
@@ -168,9 +168,9 @@ class Diagnostic(models.Model):
 
 
     THAL_VALUE = (
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
+        ('1', 'Valeur: 1'),
+        ('2', 'Valeur: 2'),
+        ('3', 'Valeur: 3'),
     )
     thal = models.CharField(
     'Thal',
