@@ -60,7 +60,7 @@ class Diagnostic(models.Model):
     )
     cp = models.CharField(
         'Chest pain type',
-        max_length=1,
+        max_length=13,
         choices=CP_VALUE,
         default='0',
         help_text='(4 values)',
@@ -83,7 +83,8 @@ class Diagnostic(models.Model):
     fbs = models.CharField(
     'Fasting blood sugar',
     default='0',
-    max_length=1,
+    max_length=13,
+    choices=FBS_VALUE,
     help_text='(fasting blood sugar > 120 mg/dl) (1 = true; 0 = false)')
     
 
@@ -95,6 +96,7 @@ class Diagnostic(models.Model):
     restecg = models.CharField(
     'Resting electrocardiographic results',
     default='0',
+    choices=RESTECG_VALUE,
     max_length=13,
     help_text=' (values 0,1,2)')
 
@@ -112,21 +114,31 @@ class Diagnostic(models.Model):
     exang = models.CharField(
     'Exercise induced angina',
     default='0',
+    choices=EXANG_VALUE,
     max_length=13,
     help_text='exercise induced angina (1 = yes; 0 = no)')
 
-
-
-    oldpeak = models.CharField(
+    oldpeak = models.DecimalField(
     'Oldpeak',
-    max_length=13,
-    default='',
+    max_digits=2,
+    decimal_places=1,
+    default=0,
     help_text='Oldpeak = ST depression induced by exercise relative to rest')
 
+    SLOPE_VALUE = (
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+    )
+
     slope = models.CharField(
-    'Slope',default='',
-    max_length=13,
+    'Slope',
+    default='',
+    choices=SLOPE_VALUE,
+    max_length = 13,
     help_text='The slope of the peak exercise ST segment')
+
+
 
     ca = models.CharField(
     'Number of major vessels',
