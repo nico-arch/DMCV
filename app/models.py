@@ -122,7 +122,7 @@ class Diagnostic(models.Model):
     'Oldpeak',
     max_digits=2,
     decimal_places=1,
-    default=0,
+    default=0.0,
     help_text='Oldpeak = ST depression induced by exercise relative to rest')
 
     SLOPE_VALUE = (
@@ -133,21 +133,35 @@ class Diagnostic(models.Model):
 
     slope = models.CharField(
     'Slope',
-    default='',
+    default='1',
     choices=SLOPE_VALUE,
     max_length = 13,
     help_text='The slope of the peak exercise ST segment')
 
-
+    CA_VALUE = (
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+    )
 
     ca = models.CharField(
     'Number of major vessels',
-    default='',
+    default='1',
+    choices=CA_VALUE,
     max_length=13,
     help_text='Number of major vessels (0-3) colored by flourosopy')
 
+
+    THAL_VALUE = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+    )
     thal = models.CharField(
-    'Thal',default='',
+    'Thal',
+    default='2',
+    choices=THAL_VALUE,
     max_length=13, 
     help_text='Thal: 3 = normal; 6 = fixed defect; 7 = reversable defect')
 
