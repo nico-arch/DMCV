@@ -1,15 +1,13 @@
-{% extends 'base.html' %}
-{% block body %}
-  {% load static %}
-	<section class="slider" id="home">
-		<div class="container-fluid">
-			<div class="row">
-			    <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
-					<div class="header-backup"></div>
-			        <!-- Wrapper for slides -->
-			        <div class="carousel-inner" role="listbox">
-			            <div class="item active">
-			            	<img src="{% static '/img/slide-one.jpg' %}" alt="">
+{% extends 'base.html' %} {% block body %} {% load static %}
+<section class="slider" id="home">
+	<div class="container-fluid">
+		<div class="row">
+			<div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
+				<div class="header-backup"></div>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<img src="{% static '/img/slide-one.jpg' %}" alt="">
 			                <div class="carousel-caption">
 		               			<h1>providing</h1>
 		               			<p>highquality service for men &amp; women</p>

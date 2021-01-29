@@ -1,1 +1,33 @@
-Welcome to your profile!
+<html>
+
+<head></head>
+
+<body>
+	{% if user.is_authenticated %}
+	<li>User: {{ user.get_username }}</li>
+
+
+
+	<li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+	{% else %}
+	<li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+
+	<h1>Liste de diagnostics</h1>
+
+	{% if diagnostic_list %}
+	<ul>
+
+		{% for diagnostic in diagnostic_list %}
+		<li class="">
+			{{diagnostic.book.cp}}</a> ({{ diagnostic.trestbps }})
+		</li>
+		{% endfor %}
+	</ul>
+
+	{% else %}
+	<p>There are no diagnostic.</p>
+	{% endif %} {% endif %}
+
+</body>
+
+</html>
