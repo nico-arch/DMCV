@@ -5,20 +5,21 @@
 <body>
 	{% if user.is_authenticated %}
 	<li>User: {{ user.get_username }}</li>
-  <h1>Liste de diagnostics</h1>
-  <p>dossier {{ dossier }}</p>
+	<h1>Liste de diagnostics</h1>
+	<p>dossier {{ dossier }}</p>
 
 
-    <ul>
+	<ul>
 
-      {% for diagnostic in diagnostics %}
-      <li class="">
-        {{diagnostic.cp}}</a> ({{ diagnostic.trestbps }})
-      </li>
-      {% endfor %}
-    </ul>
+		{% for diagnostic in diagnostics %} {% if dossier.utilisateur == dossier.utilsateur %}
 
-  
+		<li class="">
+			{{diagnostic.cp}}</a> ({{ diagnostic.trestbps }})
+		</li>
+		{% endif %} {% endfor %}
+	</ul>
+
+
 
 
 
@@ -31,9 +32,9 @@
 	{% else %}
 	<li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
 
-	
-	
-  {% endif %}
+
+
+	{% endif %}
 
 </body>
 

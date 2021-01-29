@@ -14,13 +14,11 @@ def profile(request):
     dossierUtl = Dossier.objects.filter(utilsateur = request.user)
     
     #diagnostics = list(Diagnostic.objects.all().filter( dossier= dossierUtl) )
-    diagnostics = list(Diagnostic.objects.all())
-    diagnosticCount = diagnostics.count()
+    diagnostics = Diagnostic.objects.all()
 
     context = {
         'dossier': dossierUtl,
         'diagnostics': diagnostics,
-        'count': diagnosticCount,
     }
 
     return render(request, 'profile/index.html', context = context)
