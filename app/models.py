@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from datetime import date, timedelta
 from django.utils import timezone
 
+from app.ml import *
+
 import datetime
 import dateutil
 
@@ -12,8 +14,7 @@ import dateutil
 
 class Dossier(models.Model):
     """Table contenant des informations pour la création de dossiers virtuels pour les patients de la clinique."""
-    #type = models.CharField(max_length=200, help_text='Edition du livre')
-
+    
     utilsateur  = models.OneToOneField(
     User,
     on_delete = models.CASCADE,
@@ -52,9 +53,9 @@ class Dossier(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        #return self.nom
+
         return 'Dossier de : {0}'.format(self.utilsateur.username)
-        #return '{0} ({1})'.format(self.id,self.book.title))
+
 
 
 
@@ -103,9 +104,9 @@ class Diagnostic(models.Model):
 
 
     RESTECG_VALUE = (
-        ('0', 'Niveau: 1'),
-        ('1', 'Niveau: 2'),
-        ('2', 'Niveau: 3'),
+        ('0', 'Valeur: 0'),
+        ('1', 'Valeur: 1'),
+        ('2', 'Valeur: 2'),
     )
     restecg = models.CharField(
     'Resting electrocardiographic results',
@@ -182,13 +183,31 @@ class Diagnostic(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        #return self.nom
-        return 'Diagnostic de : {0}'.format(self.dossier.utilsateur.username)
-        #return '{0} ({1})'.format(self.id,self.book.title))
+
+        ml = MachineLearning()
+        #age  = int( (date.today() - self.dossier.dateDeNaissance) // timedelta(days=365.2425) )
+        age = self.birthday(self.dossier.dateDeNaissance)
+
+        return 'Diagnostic de : {0} ===> Prediction : {1}'.format(
+        self.dossier.utilsateur.username,
+         ml.predict(
+                    age,
+                    self.dossier.sex,
+                    self.cp,
+                    self.trestbps,
+                    self.chol,
+                    self.fbs,
+                    self.restecg,
+                    self.thalach,
+                    self.exang,
+                    self.oldpeak,
+                    self.slope,
+                    self.ca,
+                    self.thal))
 
 
 
-    def birthday(date):
+    def birthday(self, date):
         # Get the current date
         now = datetime.datetime.utcnow()
         now = now.date()
@@ -198,6 +217,9 @@ class Diagnostic(models.Model):
         age = age.years
 
         return age
+
+
+
 
 class Prescription(models.Model):
     """Table contenant les prescriptions et les notes essentielles pour les patients."""
@@ -209,20 +231,17 @@ class Prescription(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        #return self.nom
-        return 'Prescription de :{0}'.format(self.diagnostic.dossier.utilsateur.username)
-        #return '{0} ({1})'.format(self.id,self.book.title))
 
+        return 'Prescription de :{0}'.format(self.diagnostic.dossier.utilsateur.username)
 
 
 class RendezVous(models.Model):
     """Table contenant des informations pour la configuration des rendez-vous"""
-    dossier   = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
-    date     = models.DateField(null=True, blank=True)
+    dossier = models.ForeignKey('Dossier', on_delete=models.SET_NULL, null=True)
+    date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        #return self.nom
-        return 'RendezVous de :{0} ______ le : {1} (Année - Mois - Jour)'.format(self.dossier.utilsateur.username, self.date)
-        #return '{0} ({1})'.format(self.id,self.book.title))
+
+        return 'Rendez Vous de :{0} ______ le : {1} (Année - Mois - Jour)'.format(self.dossier.utilsateur.username, self.date)
