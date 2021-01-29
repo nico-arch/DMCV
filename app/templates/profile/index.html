@@ -5,6 +5,25 @@
 <body>
 	{% if user.is_authenticated %}
 	<li>User: {{ user.get_username }}</li>
+  <h1>Liste de diagnostics</h1>
+  <p>dossier {{ dossier }}</p>
+
+
+    <ul>
+
+      {% for diagnostic in diagnostics %}
+      <li class="">
+        {{diagnostic.cp}}</a> ({{ diagnostic.trestbps }})
+      </li>
+      {% endfor %}
+    </ul>
+
+  
+
+
+
+
+
 
 
 
@@ -12,21 +31,9 @@
 	{% else %}
 	<li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
 
-	<h1>Liste de diagnostics</h1>
-
-	{% if diagnostic_list %}
-	<ul>
-
-		{% for diagnostic in diagnostic_list %}
-		<li class="">
-			{{diagnostic.book.cp}}</a> ({{ diagnostic.trestbps }})
-		</li>
-		{% endfor %}
-	</ul>
-
-	{% else %}
-	<p>There are no diagnostic.</p>
-	{% endif %} {% endif %}
+	
+	
+  {% endif %}
 
 </body>
 
