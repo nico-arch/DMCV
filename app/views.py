@@ -7,4 +7,4 @@ def index(request):
     return render(request, 'index.html')
 
 def profile(request):
-    return render(request, 'profile\index.html')
+    return render(request, 'profile/index.html')

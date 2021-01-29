@@ -77,7 +77,7 @@ class Diagnostic(models.Model):
         'Chest pain type',
         max_length=13,
         choices=CP_VALUE,
-        default='0',
+        default='1',
         help_text='(4 values)',
     )
 
@@ -88,7 +88,7 @@ class Diagnostic(models.Model):
 
 
     chol = models.IntegerField('Serum cholestoral',
-    default=131,
+    default=236,
     help_text='mg/dl')
 
     FBS_VALUE = (
