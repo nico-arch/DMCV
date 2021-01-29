@@ -9,7 +9,7 @@ class MachineLearning(object):
     """docstring for MachineLearning."""
 
     module_dir = os.path.dirname(__file__) # get the current directory
-    file_path = os.path.join(module_dir, 'static\ml\heart_model.pickle')
+    file_path = os.path.join(module_dir, 'static/ml/heart_model.pickle')
     model = pd.read_pickle(file_path)
 
     def __init__(self):

@@ -8,6 +8,8 @@ authors = ["repl.it user <replituser@example.com>"]
 python = "^3.8"
 django = "^3.1.4"
 django-import-export = "^2.5.0"
+pandas = "^1.2.1"
+sklearn = "^0.0"
 
 [tool.poetry.dev-dependencies]
 
