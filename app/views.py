@@ -15,6 +15,11 @@ def test(request):
 
 
 #from django.contrib.auth.mixins import LoginRequiredMixin
+
+# to make sure that only logged-in users can access the view.
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def profile(request):
 
   # Cherche le dossier de l'utilisateur

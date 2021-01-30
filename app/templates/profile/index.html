@@ -39,21 +39,31 @@
 
 <body>
 	{% if user.is_authenticated %}
-	<li><a href="{% url 'logout'%}">Logout</a></li>
+
+	<br>
 	<div class="wrapper">
 		<!--   Creative Tim Branding   -->
 		<a href="">
 			<div class="logo-container full-screen-table-demo">
-				<div class="logo">
-					<img src="{% static '/assets/img/new_logo.png' %}">
-      </div>
+
       <div class="brand">
         Utilisateur: {{ user.get_username }}
       </div>
+			<div class="brand">
+
+      </div>
+			<div class="brand">
+				<!-- <img src="{% static '/assets/img/new_logo.png' %}"> -->
+				<a href="{% url 'logout'%}">Se déconnecter</a>
+		</div>
     </div>
   </a>
+
+
+
+
 {% if  diagnostics %}
-  <div class="fresh-table full-color-blue full-screen-table">
+  <div class="fresh-table full-color-azure ">
   <!--
     Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
     Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
@@ -62,19 +72,19 @@
       <thead>
 				<th data-field="id">id</th>
         <th data-field="age" data-sortable="true">age</th>
-        <th data-field="sex" data-sortable="true">sex</th>
-        <th data-field="diagnostic.cp" data-sortable="true">diagnostic.cp</th>
-        <th data-field="diagnostic.trestbps" data-sortable="true">diagnostic.trestbps</th>
-        <th data-field="diagnostic.chol" data-sortable="true">diagnostic.chol</th>
-        <th data-field="diagnostic.fbs" data-sortable="true">diagnostic.fbs</th>
-				<th data-field="diagnostic.restecg" data-sortable="true">diagnostic.restecg</th>
-				<th data-field="diagnostic.thalach" data-sortable="true">diagnostic.thalach</th>
-        <th data-field="diagnostic.exang" data-sortable="true">diagnostic.exang</th>
-        <th data-field="diagnostic.oldpeak" data-sortable="true">diagnostic.oldpeak</th>
-        <th data-field="diagnostic.slope" data-sortable="true">diagnostic.slope</th>
-        <th data-field="diagnostic.ca" data-sortable="true">diagnostic.ca</th>
-        <th data-field="diagnostic.thal" data-sortable="true">diagnostic.thal</th>
-				<th data-field="diagnostic" data-sortable="true">diagnostic</th>
+        <!-- <th data-field="sex" data-sortable="true">sex</th>
+        <th data-field="diagnostic.cp" data-sortable="true">Cp</th>
+        <th data-field="diagnostic.trestbps" data-sortable="true">Trestbps</th>
+        <th data-field="diagnostic.chol" data-sortable="true">Chol</th>
+        <th data-field="diagnostic.fbs" data-sortable="true">Fbs</th>
+				<th data-field="diagnostic.restecg" data-sortable="true">Restecg</th>
+				<th data-field="diagnostic.thalach" data-sortable="true">Thalach</th>
+        <th data-field="diagnostic.exang" data-sortable="true">Exang</th>
+        <th data-field="diagnostic.oldpeak" data-sortable="true">Oldpeak</th>
+        <th data-field="diagnostic.slope" data-sortable="true">Slope</th>
+        <th data-field="diagnostic.ca" data-sortable="true">Ca</th>
+        <th data-field="diagnostic.thal" data-sortable="true">Thal</th> -->
+				<th data-field="diagnostic" data-sortable="true">prédiction</th>
       </thead>
       <tbody>
 
@@ -82,7 +92,7 @@
         <tr>
 					<td>1</td>
           <td>{{age}}</td>
-          <td>{{sex}}</td>
+          <!--<td>{{sex}}</td>
           <td>{{diagnostic.cp}}</td>
           <td>({{ diagnostic.trestbps }})</td>
           <td>{{diagnostic.chol}}</td>
@@ -93,7 +103,7 @@
 					<td>{{diagnostic.oldpeak}}</td>
 					<td>{{diagnostic.slope}}</td>
 					<td>{{diagnostic.ca}}</td>
-					<td>{{diagnostic.thal}}</td>
+					<td>{{diagnostic.thal}}</td> -->
 					<td>{{diagnostic}}</td>
 				</tr>
 				{% endfor %}
@@ -183,16 +193,5 @@
 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
 {% endif %}
 </body>
-
-
-
-
-
-
-
-
-
-
-
 
 </html>
