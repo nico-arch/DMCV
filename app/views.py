@@ -8,6 +8,12 @@ import dateutil
 def index(request):
     return render(request, 'index.html')
 
+
+def test(request):
+    return render(request, 'profile/full-screen-table.html')
+
+
+
 #from django.contrib.auth.mixins import LoginRequiredMixin
 def profile(request):
 
