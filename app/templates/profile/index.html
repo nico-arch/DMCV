@@ -6,29 +6,24 @@
 	{% if user.is_authenticated %}
 	<li>User: {{ user.get_username }}</li>
 	<h1>Liste de diagnostics</h1>
-	<p>dossier {{ dossier }}</p>
+	<p>dossier  de :{{ user.get_username }}</p>
 
 
 	<ul>
-
-		{% for diagnostic in diagnostics %} {% if dossier.utilisateur == dossier.utilsateur %}
+    {% if  diagnostics %}
+		{% for diagnostic in diagnostics %} {% if dossier.utilisateur.username == dossier.utilsateur.username %}
 
 		<li class="">
-			{{diagnostic.cp}}</a> ({{ diagnostic.trestbps }})
+			{{age}}  {{sex}}  {{diagnostic.cp}}
+			 ({{ diagnostic.trestbps }}) {{diagnostic.chol}} {{diagnostic.fbs}}
+			 {{diagnostic.restecg}}  {{diagnostic.thalach}}
+		   {{diagnostic.exang}} {{diagnostic.oldpeak}} {{diagnostic.slope}}
+			  {{diagnostic.ca}} {{diagnostic.thal}} {{diagnostic}}
 		</li>
-		{% endif %} {% endfor %}
+		{% endif %} {% endfor %} {% endif %}
 	</ul>
 
-
-
-
-
-
-
-
-
-
-	<li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+	<li><a href="{% url 'logout'%}">Logout</a></li>
 	{% else %}
 	<li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
 
