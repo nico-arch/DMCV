@@ -24,22 +24,37 @@ def profile(request):
 
   # Cherche le dossier de l'utilisateur
     dossierUtl = Dossier.objects.all().filter(utilsateur = request.user)
-    dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
 
 
-    # Cherche la liste de diagnostics de l'utilisateur
-    diagnostics_list = Diagnostic.objects.all().filter( dossier__in= dossierUtl)
-
-    #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
-    sex  = dossierUtlnext.sex
-    age  = int( (date.today() - dossierUtlnext.dateDeNaissance) // timedelta(days=365.2425) )
+    try:
+        dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+        #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
 
 
-    context = {
-        'dossier': dossierUtl,
-        'age': age,
-        'sex': sex,
-        'diagnostics': diagnostics_list,
-    }
+        # Cherche la liste de diagnostics de l'utilisateur
+        diagnostics_list = Diagnostic.objects.all().filter( dossier__in= dossierUtl)
 
-    return render(request, 'profile/index.html', context = context)
+        #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+        sex  = dossierUtlnext.sex
+        #age  = int( (date.today() - dossierUtlnext.dateDeNaissance) // timedelta(days=365.2425) )
+
+
+        context = {
+            'dossier': dossierUtl,
+            #'age': age,
+            'sex': sex,
+            'diagnostics': diagnostics_list,
+        }
+
+        return render(request, 'profile/index.html', context = context)
+
+    except:
+        context = {
+        'dossier': 'error',
+        #'age': 'error',
+        'sex': 'error',
+        'diagnostics': False,
+        }
+        return render(request, 'profile/index.html', context = context)
+
+    

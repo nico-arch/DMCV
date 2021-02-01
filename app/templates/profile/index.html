@@ -58,11 +58,14 @@
 			<div class="brand">
 
       </div>
+
 			<div class="brand">
 				<!-- <img src="{% static '/assets/img/new_logo.png' %}"> -->
 				<a href="{% url 'logout'%}">Se déconnecter</a>
+			</div>
+
+
 		</div>
-    </div>
   </a>
 
 
@@ -77,7 +80,7 @@
     <table id="fresh-table" class="table">
       <thead>
 				<th data-field="id">id</th>
-        <th data-field="age" data-sortable="true">age</th>
+        <th data-field="date" data-sortable="true">Date</th>
         <!-- <th data-field="sex" data-sortable="true">sex</th>
         <th data-field="diagnostic.cp" data-sortable="true">Cp</th>
         <th data-field="diagnostic.trestbps" data-sortable="true">Trestbps</th>
@@ -97,7 +100,7 @@
 				{% for diagnostic in diagnostics %}
         <tr>
 					<td>1</td>
-          <td>{{age}}</td>
+          <td>{{diagnostic.date}}</td>
           <!--<td>{{sex}}</td>
           <td>{{diagnostic.cp}}</td>
           <td>({{ diagnostic.trestbps }})</td>
@@ -118,6 +121,17 @@
     </table>
   </div>
 	{% endif %}
+
+
+{% if not diagnostics %}
+<div class="fresh-table full-color-green ">
+  <p>Vous n'avez pas de releves sur le systeme</p>
+</div>
+{% endif %}
+
+
+
+
   <div class="description description-footer">
     <p>Copyright &copy; 2021 <a href="">DMCV</a>, made with <i class="fa fa-heart ct-heart"></i> for a better web.</p>
   </div>

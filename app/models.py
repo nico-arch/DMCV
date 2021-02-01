@@ -22,8 +22,8 @@ class Dossier(models.Model):
 
     dateDeNaissance = models.DateField('Date de naissance',
                                        default=timezone.now,
-                                       null=True,
-                                       blank=True)
+                                       null=False,
+                                       blank=False)
 
     SEX_VALUE = (
         ('0', 'M'),
@@ -56,13 +56,16 @@ class Dossier(models.Model):
 class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
     dossier = models.ForeignKey('Dossier',
-                                on_delete=models.SET_NULL,
-                                null=True)
+                                on_delete=models.CASCADE,
+                                )
 
     #age = (date.today() - dossier.dateDeNaissance) // timedelta(days=365.2425)
     #age = birthday(dossier.age)
     #sex = dossier.sex
-
+    date = models.DateField('Date du diagnostic',
+                                       default=timezone.now,
+                                       null=False,
+                                       blank=False)
     CP_VALUE = (
         ('0', 'Valeur: 0'),
         ('1', 'Valeur: 1'),
@@ -177,7 +180,11 @@ class Diagnostic(models.Model):
 
         ml = MachineLearning()
         #age  = int( (date.today() - self.dossier.dateDeNaissance) // timedelta(days=365.2425) )
-        age = self.birthday(self.dossier.dateDeNaissance)
+        age  = int( (self.date - self.dossier.dateDeNaissance) // timedelta(days=365.2425) )
+
+
+
+        #age = self.birthday(self.dossier.dateDeNaissance)
 
         return 'Diagnostic de : {0} ===> Prediction : {1}'.format(
             self.dossier.utilsateur.username,
@@ -206,7 +213,7 @@ class Prescription(models.Model):
                                       primary_key=True,
                                       help_text='')
     ordonnance = models.CharField(max_length=500, help_text='')
-    notesImportantes = models.CharField(max_length=200, help_text='')
+    notesImportantes = models.CharField('Notes importantes',max_length=200, help_text='')
 
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
@@ -219,9 +226,12 @@ class Prescription(models.Model):
 class RendezVous(models.Model):
     """Table contenant des informations pour la configuration des rendez-vous"""
     dossier = models.ForeignKey('Dossier',
-                                on_delete=models.SET_NULL,
-                                null=True)
+                                on_delete=models.CASCADE,
+                                )
     date = models.DateField(null=True, blank=True)
+    class Meta:
+        verbose_name = 'Rendez-vous'
+        verbose_name_plural = 'Rendez-vous'
 
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
