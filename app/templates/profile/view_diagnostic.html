@@ -35,18 +35,8 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-
-          <a href="{% url 'index' %}">
-            <!--   <div class="logo-container">
-              <div class="logo">
-                <img src="">
-              </div>   -->
-
-            </div>
-            <div class="brand">
-              DMCV
-            </div>
+      
+           
           </a>
       </div>
     </div>
@@ -55,58 +45,83 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
-
-        <ul style="list-style: none; padding-top: 50px;">
-          <li> Utilisateur: {{ user.get_username }}</li>
-          <hr>
-          <li> <a href="{% url 'profile' %}">Profile</a></li>
-          <hr>
-          {% if user.is_staff %}
-          <li><a href="{% url 'admin:index' %}">Page Administration</a></li>
-          <hr>
-          {% endif %}
-
-          <li><a href="{% url 'profileRendezVous'%}">Rendez-vous</a></li>
-          <hr>
-          <li><a href="{% url 'logout'%}">Déconnexion</a></li>
-        </ul>
-      </div>
+      
       <div class="col-md-9">
         <div class="description">
-          <h2>Bienvenue {{ user.get_username }} !</h2>
+          <h2> <a href="{% url 'profile' %}">DMCV</a></h2>
         </div>
 
-        {% if  form %}
-        <div class="fresh-table full-color-azure">
-        <!--
-          Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
-          Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
-        -->
-          <!-- <div class="toolbar">
-            <button id="alertBtn" class="btn btn-default">Alert</button>
-          </div> -->
+            {% if  diagnostic and prescription %}
+            <table class="table table-sm">
+            
+            <thead>
+              <tr>
+                <th scope="col">{{ diagnostic}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Date du diagnostic</th>
+                <td>{{ diagnostic.date}} </td>
+              </tr>
+              <tr>
+                <th scope="row">Chest pain type</th>
+                <td>{{diagnostic.cp}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Resting blood pressure</th>
+                <td>{{ diagnostic.trestbps }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Serum cholestoral</th>
+                <td>{{diagnostic.chol}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Fasting blood sugar</th>
+                <td>{{diagnostic.fbs}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Resting electrocardiographic results</th>
+                <td>{{diagnostic.restecg}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Maximum heart rate achieved</th>
+                <td>{{diagnostic.thalach}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Exercise induced angina</th>
+                <td>{{diagnostic.exang}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Oldpeak</th>
+                <td>{{diagnostic.oldpeak}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Slope</th>
+                <td>{{diagnostic.slope}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Number of major vessels</th>
+                <td>{{diagnostic.ca}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Thal</th>
+                <td>{{diagnostic.thal}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Ordonnance</th>
+                <td>{{prescription.pk}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Notes importantes :</th>
+                <td>{{prescription2.pk}}</td>
+              </tr>
 
-          <div class="container">
-            <form method="POST">
-              {% csrf_token %}
-              {% for field in form %}
-              <div class="form-group row">
-                <label for="id_{{field.name}}" class="col-2 col-form-label">{{field.label}}</label>
-                <div class="col-10">
-                  {{field}}
-                </div>
-              </div>
-              {% endfor %}
-              <button type="submit" class="btn btn-primary" name="button">Edit Device</button>
-              <button onclick="window.print()">Print</button>
-            </form>
-          </div>
-
-          </div>
-        	{% endif %}
-
-
+            </tbody>
+          </table>
+          <button onclick="window.print()">Imprimer</button>
+          {% endif %}
+         
 
           {% if not form %}
           <div class="fresh-table full-color-azure">

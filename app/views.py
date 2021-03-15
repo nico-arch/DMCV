@@ -90,16 +90,47 @@ def profileRendezVous(request):
 
 @login_required
 def view_diagnostic(request, pk):
+    #diagnostic = get_object_or_404(Diagnostic,pk=pk)
+
+    #diag = Diagnostic.objects.all().filter( pk = pk)
+    #prescription = Prescription.objects.all().filter( diagnostic__in = diag)
+
+    #prescription2 = Prescription.objects.filter( diagnostic = diag)
+
+    #form = DiagnosticForm (instance = diagnostic)
+
+    #context = {
+    #'diagnostic': diagnostic,
+    #'prescription': prescription,
+    #'prescription2': prescription2,
+    #}
+    #return render(request, 'profile/view_diagnostic.html', context = context )
+
     diagnostic = get_object_or_404(Diagnostic,pk=pk)
-
     diag = Diagnostic.objects.all().filter( pk = pk)
-    prescription = Prescription.objects.all().filter( diagnostic__in = diag)
+    try:
+        # Cherche la liste de RendezVous de l'utilisateur
+        rendez_vous_list = RendezVous.objects.all().filter( dossier__in= dossierUtl)
+        prescription = Prescription.objects.all().filter( diagnostic__in = diag)
 
-    form = DiagnosticForm (instance = diagnostic)
+        prescription2 = Prescription.objects.all().filter( diagnostic = diag)
 
-    context = {
-    'form': form,
-    'diagnostic': diagnostic,
-    'prescription': prescription,
-    }
-    return render(request, 'profile/view_diagnostic.html', context = context )
+        form = DiagnosticForm (instance = diagnostic)
+
+        context = {
+        'form': form,
+        'diagnostic': diagnostic,
+        'prescription': prescription,
+        'prescription2': prescription2,
+        }
+
+        return render(request, 'profile/view_diagnostic.html', context = context )
+
+    except:
+        context = {
+        'form': False,
+        'diagnostic': diagnostic,
+        'prescription': False,
+        'prescription2': False,
+        }
+        return render(request, 'profile/view_diagnostic.html', context = context )
