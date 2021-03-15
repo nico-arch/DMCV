@@ -37,6 +37,13 @@ class Dossier(models.Model):
         default='0',
         help_text='(1 = male; 0 = female)',#a corriger################################################
     )
+    phone = models.CharField(
+        'Téléphone',
+        max_length=200,
+        default='',
+        help_text='xxx xx xx xxxx'
+        )
+
     addresse = models.CharField(max_length=200,
                                 null=True,
                                 help_text='Numero, Rue')
