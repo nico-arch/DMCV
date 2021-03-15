@@ -51,7 +51,7 @@
           <h2> <a href="{% url 'profile' %}">DMCV</a></h2>
         </div>
 
-            {% if  diagnostic and prescription %}
+            {% if  diagnostic  %}
             <table class="table table-sm">
             
             <thead>
@@ -110,11 +110,11 @@
               </tr>
               <tr>
                 <th scope="row">Ordonnance</th>
-                <td>{{prescription.pk}}</td>
+                <td>{{prescription.ordonnance}}</td>
               </tr>
               <tr>
                 <th scope="row">Notes importantes :</th>
-                <td>{{prescription2.pk}}</td>
+                <td>{{prescription.notesImportantes}}</td>
               </tr>
 
             </tbody>
@@ -123,9 +123,9 @@
           {% endif %}
          
 
-          {% if not form %}
+          {% if not diagnostic %}
           <div class="fresh-table full-color-azure">
-            <p>Error form</p>
+            <p>Erreur</p>
           </div>
           {% endif %}
 
