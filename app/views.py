@@ -3,6 +3,7 @@ from .models import *
 from typing import List
 import datetime
 import dateutil
+from   .forms import *
 
 # Create your views here.
 def index(request):
@@ -22,7 +23,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def profile(request):
 
-  # Cherche le dossier de l'utilisateur
+    # Cherche le dossier de l'utilisateur
     dossierUtl = Dossier.objects.all().filter(utilsateur = request.user)
 
 
@@ -57,4 +58,48 @@ def profile(request):
         }
         return render(request, 'profile/index.html', context = context)
 
-    
+
+@login_required
+def profileRendezVous(request):
+    # Cherche le dossier de l'utilisateur
+    dossierUtl = Dossier.objects.all().filter(utilsateur = request.user)
+
+    try:
+        dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+        #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+
+
+        # Cherche la liste de RendezVous de l'utilisateur
+        rendez_vous_list = RendezVous.objects.all().filter( dossier__in= dossierUtl)
+
+
+        context = {
+            'dossier': dossierUtl,
+            'rendez_vous': rendez_vous_list,
+        }
+
+        return render(request, 'profile/rendezvous.html', context = context)
+
+    except:
+        context = {
+        'dossier': 'error',
+        'rendez_vous': False,
+        }
+        return render(request, 'profile/rendezvous.html', context = context)
+
+
+@login_required
+def view_diagnostic(request, pk):
+    diagnostic = get_object_or_404(Diagnostic,pk=pk)
+
+    diag = Diagnostic.objects.all().filter( pk = pk)
+    prescription = Prescription.objects.all().filter( diagnostic__in = diag)
+
+    form = DiagnosticForm (instance = diagnostic)
+
+    context = {
+    'form': form,
+    'diagnostic': diagnostic,
+    'prescription': prescription,
+    }
+    return render(request, 'profile/view_diagnostic.html', context = context )

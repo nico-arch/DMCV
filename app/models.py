@@ -35,7 +35,7 @@ class Dossier(models.Model):
         choices=SEX_VALUE,
         blank=True,
         default='0',
-        help_text='(1 = male; 0 = female)',
+        help_text='(1 = male; 0 = female)',#a corriger################################################
     )
     addresse = models.CharField(max_length=200,
                                 null=True,

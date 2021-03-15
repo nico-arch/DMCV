@@ -77,7 +77,7 @@
           <h2>Bienvenue {{ user.get_username }} !</h2>
         </div>
 
-        {% if  diagnostics %}
+        {% if  form %}
         <div class="fresh-table full-color-azure">
         <!--
           Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
@@ -87,58 +87,30 @@
             <button id="alertBtn" class="btn btn-default">Alert</button>
           </div> -->
 
-          <table id="fresh-table" class="table">
-            <thead>
-              <th data-field="id" data-sortable="true">ID</th>
-              <th data-field="date" data-sortable="true">Date</th>
-              <!-- <th data-field="id">ID</th>
-              <th data-field="sex" data-sortable="true">sex</th>
-              <th data-field="diagnostic.cp" data-sortable="true">Cp</th>
-              <th data-field="diagnostic.trestbps" data-sortable="true">Trestbps</th>
-              <th data-field="diagnostic.chol" data-sortable="true">Chol</th>
-              <th data-field="diagnostic.fbs" data-sortable="true">Fbs</th>
-      				<th data-field="diagnostic.restecg" data-sortable="true">Restecg</th>
-      				<th data-field="diagnostic.thalach" data-sortable="true">Thalach</th>
-              <th data-field="diagnostic.exang" data-sortable="true">Exang</th>
-              <th data-field="diagnostic.oldpeak" data-sortable="true">Oldpeak</th>
-              <th data-field="diagnostic.slope" data-sortable="true">Slope</th>
-              <th data-field="diagnostic.ca" data-sortable="true">Ca</th>
-              <th data-field="diagnostic.thal" data-sortable="true">Thal</th> -->
-      				<th data-field="diagnostic" data-sortable="true">prédiction</th>
-            </thead>
-            <tbody>
-
-              {% for diagnostic in diagnostics %}
-              <tr>
-                <td>{{diagnostic.pk}}</td>
-                <td>{{diagnostic.date}}</td>
-                <!--<td>{{sex}}</td>
-                <td>{{diagnostic.cp}}</td>
-                <td>({{ diagnostic.trestbps }})</td>
-                <td>{{diagnostic.chol}}</td>
-                <td>{{diagnostic.fbs}}</td>
-                <td>{{diagnostic.restecg}}</td>
-                <td>{{diagnostic.thalach}}</td>
-                <td>{{diagnostic.exang}}</td>
-                <td>{{diagnostic.oldpeak}}</td>
-                <td>{{diagnostic.slope}}</td>
-                <td>{{diagnostic.ca}}</td>
-                <td>{{diagnostic.thal}}</td> -->
-                <td>{{diagnostic}}</td>
-                <td> <a href="{% url 'view_diagnostic' diagnostic.pk %}">Afficher le diagnostic</a></td>
-              </tr>
-
+          <div class="container">
+            <form method="POST">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form-group row">
+                <label for="id_{{field.name}}" class="col-2 col-form-label">{{field.label}}</label>
+                <div class="col-10">
+                  {{field}}
+                </div>
+              </div>
               {% endfor %}
-            </tbody>
-          </table>
-        </div>
+              <button type="submit" class="btn btn-primary" name="button">Edit Device</button>
+              <button onclick="window.print()">Print</button>
+            </form>
+          </div>
+
+          </div>
         	{% endif %}
 
 
 
-          {% if not diagnostics %}
+          {% if not form %}
           <div class="fresh-table full-color-azure">
-            <p>Vous n'avez pas de relevés sur le système</p>
+            <p>Error form</p>
           </div>
           {% endif %}
 

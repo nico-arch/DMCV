@@ -1,29 +1,50 @@
 {% extends "base_log.html" %} {% block body %} {% load static %} {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Votre nom d'utilisateur et/ou votre mot de passe sont incorrect. Essayez à nouveau.</p>
 {% endif %} {% if next %} {% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+<p>Votre compte ne peut accéder à cette page. Pour se faire, utilisez un compte qui a accès.</p>
 {% else %}
-<p>Please login to see this page.</p>
+<p>Connectez-vous pour accéder à cette page.</p>
 {% endif %} {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-	{% csrf_token %}
-	<table>
-		<tr>
-			<td>{{ form.username.label_tag }}</td>
-			<td>{{ form.username }}</td>
-		</tr>
-		<tr>
-			<td>{{ form.password.label_tag }}</td>
-			<td>{{ form.password }}</td>
-		</tr>
-	</table>
-	<input type="submit" value="login" />
-    <input type="hidden" name="next" value="{{ next }}" />
-  </form>
+{% if user.is_authenticated %}
+<META http-equiv="refresh" content="0; URL={% url 'profile' %}">
+{% endif %}
 
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<div class="container">
+		<div class="row">
+			<div class="col-md-6 pl-2">
+				<div class="card">
+					<div class="card-title">
+						<h1 class="text-center">Connexion</h1>
+						<hr>
+					</div>
 
+					 <div class="card-body">
+						<form method="post" action="{% url 'login' %}">
+							{% csrf_token %}
+							{% load bootstrap_tags %}
+                            {{ form|as_bootstrap }}
+							<!-- <table>
+								<tr>
+									<td>{{ form.username.label_tag }}</td>
+									<td>{{ form.username }}</td>
+								</tr>
+								<tr>
+									<td>{{ form.password.label_tag }}</td>
+									<td>{{ form.password }}</td>
+								</tr>
+							</table> -->
+							<input type="submit"  class="btn btn-info btn-lg" value="Se connecter" />
+						    <input type="hidden" name="next" value="{{ next }}" />
+						</form>
+			      </div>
+		      </div>
+		      {# Assumes you setup the password_reset view in your URLconf #}
+              <p><a href="{% url 'password_reset' %}">Mot de passe oublié?</a></p>
+		    </div>
+
+	    </div>
+
+     </div>
 
 {% endblock %}

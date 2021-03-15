@@ -3,7 +3,7 @@ html,body {
 }
 
 body.my-login-page {
-	background-color: #f7f9fb;
+	background-color: #f6f5f5;   
 	font-size: 14px;
 }
 
@@ -28,7 +28,10 @@ body.my-login-page {
 
 .my-login-page .card {
 	border-color: transparent;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+	box-shadow: 6px 6px 10px rgba(0,0,0,.05);
+	background-color: #d3e0ea;
+	border-radius: 5px;
+	padding: 10px;
 }
 
 .my-login-page .card.fat {
@@ -36,7 +39,7 @@ body.my-login-page {
 }
 
 .my-login-page .card .card-title {
-	margin-bottom: 30px;
+	margin-bottom: 0px;
 }
 
 .my-login-page .form-control {

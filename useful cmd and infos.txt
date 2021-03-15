@@ -16,3 +16,6 @@ py manage.py runserver
 
 python manage.py check --deploy //Check for deployment
 c
+python manage.py changepassword <user_name>
+
+django_forms_bootstrap
