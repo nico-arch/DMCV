@@ -14,7 +14,7 @@ import dateutil
 
 class Dossier(models.Model):
     """Table contenant des informations pour la création de dossiers virtuels pour les patients de la clinique."""
-
+    
     utilsateur = models.OneToOneField(User,
                                       on_delete=models.CASCADE,
                                       primary_key=True,
