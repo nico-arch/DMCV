@@ -14,8 +14,8 @@ import dateutil
 
 class Dossier(models.Model):
     """Table contenant des informations pour la création de dossiers virtuels pour les patients de la clinique."""
-    
-    utilsateur = models.OneToOneField(User,
+
+    utilisateur = models.OneToOneField(User,
                                       on_delete=models.CASCADE,
                                       primary_key=True,
                                       help_text='')
@@ -35,7 +35,7 @@ class Dossier(models.Model):
         choices=SEX_VALUE,
         blank=True,
         default='0',
-        help_text='(1 = male; 0 = female)',#a corriger################################################
+        help_text='(0 = male; 1 = female)',#a corriger################################################
     )
     phone = models.CharField(
         'Téléphone',
@@ -52,12 +52,15 @@ class Dossier(models.Model):
                                           max_length=200,
                                           null=True,
                                           help_text='')
+    class Meta:
+        ordering = ['utilisateur']
+
 
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
 
-        return 'Dossier de : {0}'.format(self.utilsateur.username)
+        return 'Dossier de : {0}'.format(self.utilisateur.username)
 
 
 class Diagnostic(models.Model):
@@ -192,9 +195,8 @@ class Diagnostic(models.Model):
 
 
         #age = self.birthday(self.dossier.dateDeNaissance)
-
         return 'Diagnostic de : {0} ===> Prediction : {1}'.format(
-            self.dossier.utilsateur.username,
+            self.dossier.utilisateur.username,
             ml.predict(age, self.dossier.sex, self.cp, self.trestbps,
                        self.chol, self.fbs, self.restecg, self.thalach,
                        self.exang, self.oldpeak, self.slope, self.ca,
@@ -214,7 +216,6 @@ class Diagnostic(models.Model):
 
 class Prescription(models.Model):
     """Table contenant les prescriptions et les notes essentielles pour les patients."""
-
     diagnostic = models.OneToOneField('Diagnostic',
                                       on_delete=models.CASCADE,
                                       primary_key=True,
@@ -225,13 +226,13 @@ class Prescription(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-
         return 'Prescription de :{0}'.format(
-            self.diagnostic.dossier.utilsateur.username)
+            self.diagnostic.dossier.utilisateur.username)
 
 
 class RendezVous(models.Model):
     """Table contenant des informations pour la configuration des rendez-vous"""
+
     dossier = models.ForeignKey('Dossier',
                                 on_delete=models.CASCADE,
                                 )
@@ -243,6 +244,5 @@ class RendezVous(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-
         return 'Rendez Vous de :{0} ______ le : {1} (Année - Mois - Jour)'.format(
-            self.dossier.utilsateur.username, self.date)
+            self.dossier.utilisateur.username, self.date)

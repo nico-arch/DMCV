@@ -24,18 +24,18 @@ from django.contrib.auth.decorators import login_required
 def profile(request):
 
     # Cherche le dossier de l'utilisateur
-    dossierUtl = Dossier.objects.all().filter(utilsateur = request.user)
+    dossierUtl = Dossier.objects.all().filter(utilisateur = request.user)
 
 
     try:
-        dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+        dossierUtlnext = Dossier.objects.get(utilisateur = request.user)
         #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
 
 
         # Cherche la liste de diagnostics de l'utilisateur
         diagnostics_list = Diagnostic.objects.all().filter( dossier__in= dossierUtl)
 
-        #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+        #dossierUtlnext = Dossier.objects.get(utilisateur = request.user)
         sex  = dossierUtlnext.sex
         #age  = int( (date.today() - dossierUtlnext.dateDeNaissance) // timedelta(days=365.2425) )
 
@@ -62,11 +62,11 @@ def profile(request):
 @login_required
 def profileRendezVous(request):
     # Cherche le dossier de l'utilisateur
-    dossierUtl = Dossier.objects.all().filter(utilsateur = request.user)
+    dossierUtl = Dossier.objects.all().filter(utilisateur = request.user)
 
     try:
-        dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
-        #dossierUtlnext = Dossier.objects.get(utilsateur = request.user)
+        dossierUtlnext = Dossier.objects.get(utilisateur = request.user)
+        #dossierUtlnext = Dossier.objects.get(utilisateur = request.user)
 
 
         # Cherche la liste de RendezVous de l'utilisateur
@@ -98,5 +98,3 @@ def view_diagnostic(request, pk):
     'prescription': prescription,
     }
     return render(request, 'profile/view_diagnostic.html', context = context )
-
-    
