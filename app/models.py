@@ -68,7 +68,7 @@ class Diagnostic(models.Model):
     """Table contenant les champs à remplir par le médecin lors du diagnostics"""
     dossier = models.ForeignKey('Dossier',
                                 on_delete=models.CASCADE,
-                                )
+            )
 
     #age = (date.today() - dossier.dateDeNaissance) // timedelta(days=365.2425)
     #age = birthday(dossier.age)
