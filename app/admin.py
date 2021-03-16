@@ -22,7 +22,7 @@ class DiagnosticInline(admin.TabularInline):
 
 
 class DossierAdmin(admin.ModelAdmin):
-    search_fields = ['utilisateur']
+    search_fields = ['utilisateur__username']
     list_display = ('utilisateur','dateDeNaissance','identifiantCin_Nif')
     #fields = []
     inlines = [RendezVousInline, DiagnosticInline]
@@ -33,8 +33,8 @@ admin.site.register(Dossier, DossierAdmin)
 
 @admin.register(Diagnostic)
 class DiagnosticAdmin(admin.ModelAdmin):
-    #list_display = ('book', 'status', 'borrower', 'due_back', 'id')
-    #list_filter = ('status', 'due_back')
+    list_display = ('__str__','dossier','date')
+    search_fields = ['dossier__utilisateur__username']
     fieldsets = (
         ('---------', {
             'fields': ('date', 'cp', 'trestbps', 'chol','fbs','restecg')

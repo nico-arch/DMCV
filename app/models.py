@@ -59,8 +59,9 @@ class Dossier(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
+        return '{0}'.format(self.utilisateur.username)
 
-        return 'Dossier de : {0}'.format(self.utilisateur.username)
+        #return 'Dossier de : {0}'.format(self.utilisateur.username)
 
 
 class Diagnostic(models.Model):
