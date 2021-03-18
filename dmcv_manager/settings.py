@@ -133,3 +133,5 @@ This logs any emails sent to the console (so you can copy the password reset lin
 
 
 EMAIL_BACKEND =("django.core.mail.backends.console.EmailBackend")
+#SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
+SENDSMS_BACKEND = 'sendsms.backends.console.SmsBackend'

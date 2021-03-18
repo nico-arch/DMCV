@@ -63,8 +63,25 @@ Django = ">=2.0"
 diff-match-patch = "*"
 
 [package.dependencies.tablib]
-extras = ["ods", "xlsx", "xls", "html", "yaml"]
+extras = ["xls", "xlsx", "ods", "html", "yaml"]
 version = ">=0.14.0"
+
+[[package]]
+category = "main"
+description = "A simple API to send SMS messages."
+name = "django-sendsms"
+optional = false
+python-versions = "*"
+version = "0.4"
+
+[package.extras]
+bulksms = ["requests"]
+celery = ["celery"]
+esendex = ["requests"]
+ovhsms = ["requests"]
+rq = ["django-rq"]
+smssluzbacz = ["smssluzbacz-api"]
+twilio = ["twilio"]
 
 [[package]]
 category = "main"
@@ -303,7 +320,7 @@ python-versions = "*"
 version = "1.3.0"
 
 [metadata]
-content-hash = "ffa2ceab099ff0b999c0b6556b0cdf02d8e7f4f426f48dea205c25a1ccf89e72"
+content-hash = "fef37885fe4f71b2c9fea326dcebb5f8619492fa7a0a25a4cd350784225c1614"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -330,6 +347,9 @@ django-forms-bootstrap = [
 django-import-export = [
     {file = "django-import-export-2.5.0.tar.gz", hash = "sha256:c39c003bfc803fb63ba7742562f1667603a4a8d7426261845d75ce8582d40f48"},
     {file = "django_import_export-2.5.0-py3-none-any.whl", hash = "sha256:cf6f3dabdd4f32dcb26e25c7ddcba7aee3168b55d380b0da79f0349afa17c011"},
+]
+django-sendsms = [
+    {file = "django-sendsms-0.4.tar.gz", hash = "sha256:8558883e5f9fe7cf6785674c86bc5f93c979adf4e7719eacf181965dac990312"},
 ]
 et-xmlfile = [
     {file = "et_xmlfile-1.0.1.tar.gz", hash = "sha256:614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b"},

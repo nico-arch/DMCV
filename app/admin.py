@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+from sendsms import api
+
 #from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 # Register your models here.
@@ -8,6 +10,26 @@ from .models import *
 
 #class ViewAdmin(admin.ModelAdmin):
 #    pass
+
+
+#def Sms(modelddmin, request, queryset):
+#    for qs in queryset:
+#        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+
+ #       print(selected)
+        #selected = queryset.values_list('pk', flat=True)
+        #if selected > '0':
+        #   print(selected)
+        
+        #api.send_sms(body='I can haz txt', from_phone='+41791111111', to=['+41791234567'])  
+
+
+#def send_sms(modelddmin, request, queryset):
+#    #queryset.update()
+#    complete_task.short_description = 'Tache effectuee'
+
+
+
 
 class RendezVousInline(admin.TabularInline):
     """Defines format of inline Diagnostic insertion (used in DossierAdmin)"""
@@ -26,7 +48,7 @@ class DossierAdmin(admin.ModelAdmin):
     list_display = ('utilisateur','dateDeNaissance','identifiantCin_Nif')
     #fields = []
     inlines = [RendezVousInline, DiagnosticInline]
-
+#    actions = [Sms]
 
 admin.site.register(Dossier, DossierAdmin)
 

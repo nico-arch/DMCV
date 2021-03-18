@@ -11,6 +11,7 @@ django-import-export = "^2.5.0"
 pandas = "^1.2.1"
 sklearn = "^0.0"
 django-forms-bootstrap = "^3.1.0"
+django-sendsms = "^0.4"
 
 [tool.poetry.dev-dependencies]
 
