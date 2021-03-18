@@ -196,7 +196,7 @@ class Diagnostic(models.Model):
 
 
         #age = self.birthday(self.dossier.dateDeNaissance)
-        return 'Diagnostic de : {0} ===> Prediction : {1}'.format(
+        return 'Diagnostic de : {0} Prediction : {1}'.format(
             self.dossier.utilisateur.username,
             ml.predict(age, self.dossier.sex, self.cp, self.trestbps,
                        self.chol, self.fbs, self.restecg, self.thalach,
@@ -227,7 +227,7 @@ class Prescription(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        return 'Prescription de :{0}'.format(
+        return 'Prescription de : {0}'.format(
             self.diagnostic.dossier.utilisateur.username)
 
 
@@ -245,5 +245,4 @@ class RendezVous(models.Model):
     def __str__(self):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
-        return 'Rendez Vous de :{0} ______ le : {1} (Année - Mois - Jour)'.format(
-            self.dossier.utilisateur.username, self.date)
+        return 'Rendez Vous de : {0}'.format(self.dossier.utilisateur.username)

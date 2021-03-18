@@ -31,10 +31,20 @@ class DossierAdmin(admin.ModelAdmin):
 admin.site.register(Dossier, DossierAdmin)
 
 
+
+
+class PrescriptionInline(admin.TabularInline):
+    """Defines format of inline Diagnostic insertion (used in DossierAdmin)"""
+    model = Prescription
+    extra = 0
+
+
+
 @admin.register(Diagnostic)
 class DiagnosticAdmin(admin.ModelAdmin):
     list_display = ('__str__','dossier','date')
     search_fields = ['dossier__utilisateur__username']
+    inlines = [PrescriptionInline]
     fieldsets = (
         ('---------', {
             'fields': ('date', 'cp', 'trestbps', 'chol','fbs','restecg')
@@ -43,11 +53,21 @@ class DiagnosticAdmin(admin.ModelAdmin):
             'fields': ('thalach', 'exang', 'oldpeak','slope','ca','thal')
         }),
         )
-
-
 #admin.site.register(Diagnostic)
-admin.site.register(RendezVous)
-admin.site.register(Prescription)
+
+@admin.register(Prescription)
+class PrescriptionAdmin(admin.ModelAdmin):
+    list_display = ('__str__','diagnostic','notesImportantes')
+    search_fields = ['diagnostic__dossier__utilisateur__username']
+#admin.site.register(Prescription)
+
+
+@admin.register(RendezVous)
+class RendezVousAdmin(admin.ModelAdmin):
+    list_display = ('__str__','dossier','date')
+    search_fields = ['dossier__utilisateur__username']
+#admin.site.register(RendezVous)
+
 
 
 
