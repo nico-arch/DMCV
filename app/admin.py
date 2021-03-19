@@ -62,10 +62,14 @@ def send_sms(modeladmin, request, queryset):
 
 
 def supprimer_les_anciens_rendezvous(modeladmin, request, queryset):
+    to_be_deleted = []
     for obj in queryset:
         #RendezVous passe
         if date.today() > obj.GetDate():
            print("Date today is > than the RendezVous date")
+           to_be_deleted.append(obj.pk)
+
+    queryset.filter(pk__in=to_be_deleted).delete()
 
 
 class RendezVousInline(admin.TabularInline):
