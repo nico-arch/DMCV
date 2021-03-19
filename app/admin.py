@@ -29,10 +29,12 @@ from datetime import date
 
 
 def send_sms(modeladmin, request, queryset):
+
+    fromPhoneNumber ='+50900000000'
     for obj in queryset:
         #Rendevous est aujoud'hui
         if date.today() == obj.GetDate():
-           api.send_sms(body='Cher(e) client vous avez un rendevous aujourd\'hui a la clinique.', from_phone='+41791111111', to=[str(obj.GetPhoneNumber())]) 
+           api.send_sms(body='Cher(e) client vous avez un rendevous aujourd\'hui a la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())]) 
 
         #Rendevous est pour l'avenir
         if date.today() < obj.GetDate():
@@ -44,7 +46,7 @@ def send_sms(modeladmin, request, queryset):
            #Alert 1 week before the Rendezvous
            weekCondition = 1
            if (result == weekCondition) and (d1.isoweekday() == d2.isoweekday()):
-              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(weekCondition)+' semaine(s) à la clinique.', from_phone='+41791111111', to=[str(obj.GetPhoneNumber())]) 
+              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(weekCondition)+' semaine(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())]) 
               #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
               #print("Rendevous day =", d1.isoweekday() )
               #print("Today day =", d2.isoweekday() )
@@ -52,7 +54,7 @@ def send_sms(modeladmin, request, queryset):
            #Alert 1 day before the Rendezvous
            dayCondition = 1
            if (result == 0) and (d1.isoweekday() == d2.isoweekday()+dayCondition  ):
-              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone='+41791111111', to=[str(obj.GetPhoneNumber())])
+              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
               #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
               #print("Rendevous day =", d1.isoweekday() )
               #print("Today day =", d2.isoweekday() )
