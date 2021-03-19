@@ -9,6 +9,8 @@ from app.ml import *
 import datetime
 import dateutil
 
+from django.shortcuts import render, redirect, get_object_or_404
+
 # Create your models here.
 
 
@@ -246,3 +248,12 @@ class RendezVous(models.Model):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
         return 'Rendez Vous de : {0}'.format(self.dossier.utilisateur.username)
+    
+    def GetDate(self):
+      
+        return self.date
+
+    def GetPhoneNumber(self):
+        do = get_object_or_404(Dossier, pk=self.dossier.pk)
+
+        return do.phone
