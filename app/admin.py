@@ -34,12 +34,15 @@ def send_sms(modeladmin, request, queryset):
     for obj in queryset:
         #Rendevous est aujoud'hui
         if date.today() == obj.GetDate():
-           api.send_sms(body='Chèr(e) client(e) vous avez un rendevous aujourd\'hui a la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
+           api.send_sms(body='Chèr(e) client(e) vous avez un rendevous aujourd\'hui a la clinique à '+str(h1) +'.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
 
         #Rendevous est pour l'avenir
         if date.today() < obj.GetDate():
            d1 =  obj.GetDate()
+           h1 =  obj.GetHour()
+
            d2 = date.today()
+
            result = (d1-d2).days//7
 
 
@@ -47,7 +50,7 @@ def send_sms(modeladmin, request, queryset):
            dayCondition = 1
            if ((result == 0) and (d1.isoweekday() == d2.isoweekday()+dayCondition )) or ((result == 0) and (d1.isoweekday() == d2.isoweekday()-6)):
               #api.send_sms(body= 'result = '+str(result)+' d1.isoweekday() ='+ str(d1.isoweekday())+' d2.isoweekday()+dayCondition = '+str(d2.isoweekday()+dayCondition )+'  Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
-              api.send_sms(body=  'Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
+              api.send_sms(body=  'Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique à '+str(h1) +'.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
               #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
               #print("Rendevous day =", d1.isoweekday() )
               #print("Today day =", d2.isoweekday() )
@@ -56,7 +59,7 @@ def send_sms(modeladmin, request, queryset):
            #Alert 1 week before the Rendezvous
            weekCondition = 1
            if (result == weekCondition) and (d1.isoweekday() == d2.isoweekday()):
-              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(weekCondition)+' semaine(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
+              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(weekCondition)+' semaine(s) à la clinique à '+str(h1) +'.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
               #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
               #print("Rendevous day =", d1.isoweekday() )
               #print("Today day =", d2.isoweekday() )
@@ -132,7 +135,7 @@ class PrescriptionAdmin(admin.ModelAdmin):
 
 @admin.register(RendezVous)
 class RendezVousAdmin(admin.ModelAdmin):
-    list_display = ('__str__','dossier','date')
+    list_display = ('__str__','dossier','date','Heure')
     search_fields = ['dossier__utilisateur__username']
     actions = [send_sms, supprimer_les_anciens_rendezvous]
 

@@ -240,6 +240,9 @@ class RendezVous(models.Model):
                                 on_delete=models.CASCADE,
                                 )
     date = models.DateField(null=True, blank=True)
+
+    Heure = models.TimeField()
+
     class Meta:
         verbose_name = 'Rendez-vous'
         verbose_name_plural = 'Rendez-vous'
@@ -248,10 +251,13 @@ class RendezVous(models.Model):
         """Cette fonction est obligatoirement requise par Django.
            Elle retourne une chaîne de caractère pour identifier l'instance de la classe d'objet."""
         return 'Rendez Vous de : {0}'.format(self.dossier.utilisateur.username)
-    
+
     def GetDate(self):
-      
+
         return self.date
+    def GetHour(self):
+
+        return self.Heure
 
     def GetPhoneNumber(self):
         do = get_object_or_404(Dossier, pk=self.dossier.pk)
