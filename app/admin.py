@@ -24,8 +24,8 @@ from datetime import date
         #selected = queryset.values_list('pk', flat=True)
         #if selected > '0':
         #   print(selected)
-        
-        #api.send_sms(body='I can haz txt', from_phone='+41791111111', to=['+41791234567'])  
+
+        #api.send_sms(body='I can haz txt', from_phone='+41791111111', to=['+41791234567'])
 
 
 def send_sms(modeladmin, request, queryset):
@@ -34,31 +34,34 @@ def send_sms(modeladmin, request, queryset):
     for obj in queryset:
         #Rendevous est aujoud'hui
         if date.today() == obj.GetDate():
-           api.send_sms(body='Cher(e) client vous avez un rendevous aujourd\'hui a la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())]) 
+           api.send_sms(body='Chèr(e) client(e) vous avez un rendevous aujourd\'hui a la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
 
         #Rendevous est pour l'avenir
         if date.today() < obj.GetDate():
            d1 =  obj.GetDate()
            d2 = date.today()
            result = (d1-d2).days//7
-           
-          
+
+
+           #Alert 1 day before the Rendezvous
+           dayCondition = 1
+           if ((result == 0) and (d1.isoweekday() == d2.isoweekday()+dayCondition )) or ((result == 0) and (d1.isoweekday() == d2.isoweekday()-6)):
+              #api.send_sms(body= 'result = '+str(result)+' d1.isoweekday() ='+ str(d1.isoweekday())+' d2.isoweekday()+dayCondition = '+str(d2.isoweekday()+dayCondition )+'  Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
+              api.send_sms(body=  'Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
+              #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
+              #print("Rendevous day =", d1.isoweekday() )
+              #print("Today day =", d2.isoweekday() )
+
+
            #Alert 1 week before the Rendezvous
            weekCondition = 1
            if (result == weekCondition) and (d1.isoweekday() == d2.isoweekday()):
-              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(weekCondition)+' semaine(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())]) 
+              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(weekCondition)+' semaine(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
               #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
               #print("Rendevous day =", d1.isoweekday() )
               #print("Today day =", d2.isoweekday() )
-            
-           #Alert 1 day before the Rendezvous
-           dayCondition = 1
-           if (result == 0) and (d1.isoweekday() == d2.isoweekday()+dayCondition  ):
-              api.send_sms(body='Chèr(e) client(e) vous avez un rendez-vous dans '+str(dayCondition)+' jour(s) à la clinique.', from_phone=fromPhoneNumber, to=[str(obj.GetPhoneNumber())])
-              #print("Date today is < than the RendezVous date, Week between: ", result,"\n -------------------------------------------------------")
-              #print("Rendevous day =", d1.isoweekday() )
-              #print("Today day =", d2.isoweekday() )
-  
+
+
 
 
 def supprimer_les_anciens_rendezvous(modeladmin, request, queryset):
@@ -123,7 +126,7 @@ class PrescriptionAdmin(admin.ModelAdmin):
     list_display = ('__str__','diagnostic','notesImportantes')
     search_fields = ['diagnostic__dossier__utilisateur__username']
 
-    
+
 #admin.site.register(Prescription)
 
 
@@ -132,8 +135,8 @@ class RendezVousAdmin(admin.ModelAdmin):
     list_display = ('__str__','dossier','date')
     search_fields = ['dossier__utilisateur__username']
     actions = [send_sms, supprimer_les_anciens_rendezvous]
-    
-   
+
+
 #admin.site.register(RendezVous)
 
 
