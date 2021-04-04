@@ -29,12 +29,12 @@
 	<header class="top-header">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5 header-logo">
+				<div class="col-md-3 header-logo">
 					<br>
-					<a href="{% url 'index' %}"><img src="{% static '/img/logo.png' %}" alt="" class="img-responsive logo"></a>
+					<a href="{% url 'index' %}"><img src="{% static '/img/logodmcv.png' %}" alt="" class="img-responsive logo"></a>
 				</div>
 
-				<div class="col-md-7">
+				<div class="col-md-9">
 					<nav class="navbar navbar-default">
 					  <div class="container-fluid nav-bar">
 					    <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,10 +50,11 @@
 					    <!-- Collect the nav links, forms, and other content for toggling -->
 					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-					      <ul class="nav navbar-nav navbar-right">
+					      <ul class="nav navbar-nav navbar-left">
 					        <li><a class="menu active" href="#home" >Accueil</a></li>
-					        <li><a class="menu" href="#about">A Propos</a></li>
+					        <li><a class="menu" href="#about">A Propos de Nous</a></li>
 					        <li><a class="menu" href="#service">Services </a></li>
+					        <!-- <li><a class="menu" href="#team">Equipe </a></li> -->
 					        <li><a class="menu" href="#contact">Contact</a></li>
 							<li><a class="menu" href="{% url 'login'%}">Mon compte</a></li>
 					      </ul>
