@@ -116,7 +116,7 @@ class DiagnosticAdmin(admin.ModelAdmin):
     inlines = [PrescriptionInline]
     fieldsets = (
         ('---------', {
-            'fields': ('date', 'cp', 'trestbps', 'chol','fbs','restecg')
+            'fields': ('dossier','date', 'cp', 'trestbps', 'chol','fbs','restecg')
         }),
         ('---------', {
             'fields': ('thalach', 'exang', 'oldpeak','slope','ca','thal')
