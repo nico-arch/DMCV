@@ -22,12 +22,22 @@
   <script src="{% static '/js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static '/js/bootstrap.min.js' %}"></script>
   <script src="{% static '/js/bootstrap-table.js' %}"></script>
+  <script src="{% static '/js/html-table-search.js' %}"></script>
+  <script src="{% static '/js/paginathing.js' %}"></script>
 
   <!--  Just for demo purpose, do not include in your project   -->
   <script src="{% static '/assets/js/demo/gsdk-switch.js' %}"></script>
   <script src="{% static '/assets/js/demo/jquery.sharrre.js' %}"></script>
   <script src="{% static '/assets/js/demo/demo.js' %}"></script>
 
+  <script type="text/javascript">
+			$(document).ready(function(){
+				$('table.search-table').tableSearch({
+					searchText:'Search Table',
+					searchPlaceHolder:'Input Value'
+				});
+			});
+		</script>
 </head>
 <body>
   {% if user.is_authenticated %}
@@ -78,7 +88,7 @@
         </div>
 
         {% if  rendez_vous %}
-        <div class="fresh-table full-color-azure">
+        <div >
         <!--
           Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
           Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
@@ -87,14 +97,16 @@
             <button id="alertBtn" class="btn btn-default">Alert</button>
           </div> -->
 
-          <table id="fresh-table" class="table">
+          <table  class="search-table">
             <thead>
               <th data-field="rendez_vous.date" data-sortable="true">Date des Rendez-Vous</th>
+              <th data-field="rendez_vous.Heure" data-sortable="true">Heures</th>
             </thead>
             <tbody>
               {% for rdv in rendez_vous %}
               <tr>
                 <td>{{rdv.date}}</td>
+                <td>{{rdv.Heure}}</td>
               </tr>
               {% endfor %}
             </tbody>
@@ -105,7 +117,7 @@
 
 
           {% if not rendez_vous %}
-          <div class="fresh-table full-color-azure">
+          <div class="search-table">
             <p>Vous n'avez pas de rendez-vous sur le système</p>
           </div>
           {% endif %}
@@ -123,6 +135,19 @@
 
 {% endif %}
 </body>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+
+    $('.search-table tbody').paginathing({
+      perPage: 2,
+      insertAfter: '.search-table',
+      pageNumbers: true
+    });
+
+  });
+</script>
+
   <script type="text/javascript">
     var $table = $('#fresh-table')
     var $alertBtn = $('#alertBtn')

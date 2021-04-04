@@ -188,14 +188,15 @@ li a.active {
 /*about area*/
 
 .about h2 {
-    font-size: 90px;
+    font-size: 30px;
     color: #42b3e5;
     margin-top: 50px;
 }
 .about h4 {
-    font-size: 24px;
+    font-size: 20px;
     color: #737373;
     margin-bottom: 45px;
+    text-align: justify !important;
 }
 .about-img img {
     width: 100%;
@@ -283,13 +284,13 @@ li a.active {
     margin-top: 40px;
 }
 .service h2 {
-    font-size: 90px;
+    font-size: 30px;
     color: #fff;
-    margin-top: 70px;
-    margin-bottom: 0;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
 .service h4 {
-    font-size: 24px;
+    font-size: 20px;
     color: #fff;
     margin-top: 0;
     margin-bottom: 70px;
@@ -358,12 +359,13 @@ li a.active {
     z-index: 999;
 }
 .single-service h3 {
-    margin-top: 60px;
+    font-size: 20px;
+    margin-top: 20px;
     color: #fff;
     padding-bottom: 90px;
 }
 .service-img img.heart {
-    left: 20%;
+    left: 27%;
     top: 18%;
 }
 .service-img img.brain {
@@ -387,13 +389,13 @@ li a.active {
     padding-bottom: 60px;
 }
 .team h2 {
-    font-size: 90px;
+    font-size: 30px;
     color: #42b3e5;
     margin-top: 50px;
     margin-bottom: 0;
 }
 .team h4 {
-    font-size: 24px;
+    font-size: 20px;
     color: #737373;
     margin-top: 0;
     margin-bottom: 45px;
@@ -477,7 +479,7 @@ li a.active {
 }
 .contact-heading h2 {
     color: #fff;
-    font-size: 90px;
+    font-size: 30px;
 }
 .contact-info {
     padding-left: 40px;
@@ -573,14 +575,29 @@ li a.active {
     position: relative;
     overflow: hidden;
 }
-.contact {
-    position: absolute;
+/*.contact {
+   
     width: 100%;
     height: 830px;
-    margin-top: 0px;
+    margin-top: px;
     left: 0;
     margin-top: -830px;
     background: rgba(0, 0, 0, 0.51);
+}*/
+
+.bckcontact {
+
+    /*background:#fff; */
+     color:#3c9dc8;
+    font-size: 30px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    background: rgba(0, 0, 0, 0.1);
+
+}
+
+.contact-text{
+    font-size: 20px;
 }
 .contact-caption {
     margin-top: 120px;
@@ -615,7 +632,7 @@ li a.active {
 /*======================css for carousel=========================*/
 
 .carousel-fade .carousel-inner .item {
-    opacity: 0;
+    opacity: 0.8;
     transition-property: opacity;
 }
 .carousel-fade .carousel-inner .active {
