@@ -33,8 +33,8 @@
   <script type="text/javascript">
 			$(document).ready(function(){
 				$('table.search-table').tableSearch({
-					searchText:'Search Table',
-					searchPlaceHolder:'Input Value'
+					searchText:'Recherche ',
+					searchPlaceHolder:''
 				});
 			});
 		</script>
@@ -97,8 +97,8 @@
             <button id="alertBtn" class="btn btn-default">Alert</button>
           </div> -->
 
-          <table  class="search-table">
-            <thead>
+          <table  class="table-striped table-hover table-sm search-table" width="100%" >
+            <thead class="thead-light">
               <th data-field="rendez_vous.date" data-sortable="true">Date des Rendez-Vous</th>
               <th data-field="rendez_vous.Heure" data-sortable="true">Heures</th>
             </thead>

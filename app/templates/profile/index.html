@@ -34,8 +34,8 @@
       <script type="text/javascript">
 			$(document).ready(function(){
 				$('table.search-table').tableSearch({
-					searchText:'Search Table',
-					searchPlaceHolder:'Input Value'
+					searchText:'Recherche ',
+					searchPlaceHolder:''
 				});
 			});
 		</script>
@@ -99,7 +99,7 @@
             <button id="alertBtn" class="btn btn-default">Alert</button>
           </div> -->
 
-          <table class="search-table">
+          <table class="table-striped table-hover table-sm search-table" width="100%" >
             <thead>
               <th data-field="id" data-sortable="true">ID</th>
               <th data-field="date" data-sortable="true">Date</th>
@@ -116,7 +116,7 @@
               <th data-field="diagnostic.slope" data-sortable="true">Slope</th>
               <th data-field="diagnostic.ca" data-sortable="true">Ca</th>
               <th data-field="diagnostic.thal" data-sortable="true">Thal</th> -->
-      				<th data-field="diagnostic" data-sortable="true">prédiction</th>
+      				<th data-field="diagnostic" data-sortable="true">Prédiction</th>
             </thead>
             <tbody>
 
