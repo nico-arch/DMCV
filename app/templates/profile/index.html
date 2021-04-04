@@ -122,8 +122,8 @@
 
               {% for diagnostic in diagnostics %}
               <tr>
-                <td>{{diagnostic.pk}}</td>
-                <td>{{diagnostic.date}}</td>
+                <td style="font-size:16px">{{diagnostic.pk}}</td>
+                <td style="font-size:16px">{{diagnostic.date}}</td>
                 <!--<td>{{sex}}</td>
                 <td>{{diagnostic.cp}}</td>
                 <td>({{ diagnostic.trestbps }})</td>
@@ -136,8 +136,8 @@
                 <td>{{diagnostic.slope}}</td>
                 <td>{{diagnostic.ca}}</td>
                 <td>{{diagnostic.thal}}</td> -->
-                <td>{{diagnostic}}</td>
-                <td> <a href="{% url 'view_diagnostic' diagnostic.pk %}">Afficher le diagnostic</a></td>
+                <td style="font-size:16px">{{diagnostic}}</td>
+                <td style="font-size:16px"> <a href="{% url 'view_diagnostic' diagnostic.pk %}">Afficher le diagnostic</a></td>
               </tr>
 
               {% endfor %}
