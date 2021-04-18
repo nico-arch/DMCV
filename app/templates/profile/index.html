@@ -137,7 +137,7 @@
                 <td>{{diagnostic.ca}}</td>
                 <td>{{diagnostic.thal}}</td> -->
                 <td style="font-size:16px">{{diagnostic}}</td>
-                <td style="font-size:16px"> <a href="{% url 'view_diagnostic' diagnostic.pk %}">Afficher le diagnostic</a></td>
+                <td style="font-size:16px"> <a href="{% url 'view_diagnostic' diagnostic.pk %}" target="_blank">Afficher le diagnostic</a></td>
               </tr>
 
               {% endfor %}
@@ -155,7 +155,7 @@
           {% endif %}
           	
         <div class="description description-footer">
-          <p style="color:#000">DMCV Copyright &copy; 2021.</p>
+          <p style="color:#000">CLCB Copyright &copy; 2021.</p>
         </div>
       </div>
 

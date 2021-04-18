@@ -145,6 +145,6 @@ class RendezVousAdmin(admin.ModelAdmin):
 
 
 
-admin.site.site_header = "Panneau d'administration DMCV"
-admin.site.site_title = 'DMCV'
+admin.site.site_header = "Panneau d'administration CLCB"
+admin.site.site_title = 'CLCB'
 admin.site.index_title = "Administration"

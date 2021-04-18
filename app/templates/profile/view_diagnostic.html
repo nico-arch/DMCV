@@ -35,8 +35,8 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      
-           
+
+
           </a>
       </div>
     </div>
@@ -45,15 +45,15 @@
 
   <div class="container">
     <div class="row">
-      
+
       <div class="col-md-9">
         <div class="description">
-          <h2> <a href="{% url 'profile' %}">DMCV</a></h2>
+          <h2>CLCB</a></h2>
         </div>
 
             {% if  diagnostic  %}
             <table class="table table-sm">
-            
+
             <thead>
               <tr>
                 <th scope="col">{{ diagnostic}}</th>
@@ -108,6 +108,9 @@
                 <th scope="row">Thal</th>
                 <td>{{diagnostic.thal}}</td>
               </tr>
+
+
+              {% if  prescription  %}
               <tr>
                 <th scope="row">Ordonnance</th>
                 <td>{{prescription.ordonnance}}</td>
@@ -116,12 +119,14 @@
                 <th scope="row">Notes importantes :</th>
                 <td>{{prescription.notesImportantes}}</td>
               </tr>
+              {% endif %}
+
 
             </tbody>
           </table>
           <button onclick="window.print()">Imprimer</button>
           {% endif %}
-         
+
 
           {% if not diagnostic %}
           <div class="fresh-table full-color-azure">
@@ -131,7 +136,7 @@
 
 
         <div class="description description-footer">
-          <p>DMCV Copyright &copy; 2021.</p>
+          <p>CLCB Copyright &copy; 2021.</p>
         </div>
       </div>
 

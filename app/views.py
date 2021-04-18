@@ -91,10 +91,20 @@ def profileRendezVous(request):
 @login_required
 def view_diagnostic(request, pk):
     diagnostic = get_object_or_404(Diagnostic, pk=pk)
-    prescription = get_object_or_404(Prescription, diagnostic = diagnostic)
+    try:
+        prescription = get_object_or_404(Prescription, diagnostic = diagnostic)
 
-    context = {
-    'diagnostic': diagnostic,
-    'prescription': prescription,
-    }
-    return render(request, 'profile/view_diagnostic.html', context = context )
+        context = {
+        'diagnostic': diagnostic,
+        'prescription': prescription,
+        }
+        return render(request, 'profile/view_diagnostic.html', context = context )
+        
+    except:
+        context2 = {
+            'diagnostic': diagnostic,
+            'prescription': False,
+            }
+
+
+        return render(request, 'profile/view_diagnostic.html', context = context2 )

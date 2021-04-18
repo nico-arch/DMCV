@@ -44,8 +44,8 @@ h2 {
     margin: auto;
 }
 .top-header img.logo {
-    margin-bottom: 25px;
-    margin-top: -15px;
+    margin-bottom: 7px;
+    margin-top: 25px;
     transition: all .5s ease 0s;
     -webkit-transition: all .5s ease 0s;
     -moz-transition: all .5s ease 0s;
@@ -74,7 +74,7 @@ ul.nav {
     padding: 0;
 }
 .navbar-default .navbar-nav>li>a {
-    font-size: 24px;
+    font-size: 20px;
     color: #737373;
     text-transform: uppercase;
     transition: all .7s ease 0s;
@@ -197,6 +197,7 @@ li a.active {
     color: #737373;
     margin-bottom: 45px;
     text-align: justify !important;
+    padding:0 12px;
 }
 .about-img img {
     width: 100%;
@@ -279,7 +280,7 @@ li a.active {
 /*service area*/
 
 .service {
-    background: url(../img/pattern.jpg);
+    background: #3c9dc8;  /*url(../img/pattern.jpg)*/
     background-repeat: repeat-y;
     margin-top: 40px;
 }
@@ -585,14 +586,20 @@ li a.active {
     background: rgba(0, 0, 0, 0.51);
 }*/
 
-.bckcontact {
+.contact {
 
     /*background:#fff; */
-     color:#3c9dc8;
+     /*color:#3c9dc8;
     font-size: 30px;
     margin-top: 60px;
     margin-bottom: 60px;
     background: rgba(0, 0, 0, 0.1);
+    background-repeat: repeat-y;*/
+
+    background: rgba(0, 0, 0, 0.1);  /*url(../img/pattern.jpg)*/
+    background-repeat: repeat-y;
+    margin-top: 40px;
+
 
 }
 
@@ -605,7 +612,34 @@ li a.active {
 
 /*footer*/
 
-.footer-para {
+
+.footer{
+    background: #1687a7;
+    background-repeat: repeat-y;
+    margin-top: 40px;
+    color :#fff;
+}
+
+.footer ul {
+    padding-left:0px;
+}
+
+.footer ul li{
+    padding-bottom: 10px;
+    font-size: 1.5em;
+
+}
+
+
+.footer ul li a{
+    color :#fff;
+}
+
+.footer ul li a:hover{
+    color :#000;
+}
+
+/*.footer-para {
     margin: 0;
     padding: 0;
 }
@@ -624,7 +658,7 @@ li a.active {
 }
 .footer a i.fa:hover {
     color: #42b3e5;
-}
+}*/
 .carousel-inner {
     position: relative;
 }
@@ -710,7 +744,7 @@ responsive area
         font-size: 26px;
     }
     h2 {
-        font-size: 75px !important;
+        font-size: 35px !important;
     }
     h4 {
         font-size: 22px !important;
@@ -721,6 +755,13 @@ responsive area
     .person-detail p {
         font-size: 12px;
     }
+
+
+    .single-service {
+    text-align: center;
+    
+}
+
 }
 
 /* sm */
@@ -753,12 +794,21 @@ responsive area
         height: 1050px;
     }
     .contact {
-        margin-top: -1050px;
-        height: 1050px;
+        margin-top: 0px;
+        height: 600px;
+         background: rgba(0, 0, 0, 0.1);
     }
     .contact-caption {
         margin-top: 110px;
     }
+
+
+    .single-service {
+    text-align: center;
+    margin-left: 120px;
+}
+
+
 }
 
 /* xs */
@@ -788,8 +838,8 @@ responsive area
         height: 1120px;
     }
     .contact {
-        height: 1120px;
-        margin-top: -1120px;
+        height: 600px;
+        /*margin-top: -1120px;*/
     }
     h2 {
         font-size: 70px !important;
@@ -812,7 +862,11 @@ responsive area
 
 @media (max-width: 479px) {
     .top-header img.logo {
-        margin: 20px 10px;
+        margin: -10px 10px;
+        text-align: center;
+        width: 50%;
+       position: relative;
+       left: 75px;
     }
     .header-logo {
         margin-top: 20px !important;
@@ -852,13 +906,13 @@ responsive area
         margin-top: 30px;
     }
     .about h2 {
-        font-size: 50px;
+        font-size: 30px;
         color: #42b3e5;
         margin-top: 30px;
     }
     .service h2 {
-        font-size: 50px;
-        margin-top: 40px;
+        font-size: 30px;
+        margin-top: 60px;
     }
     .team h2 {
         font-size: 50px;
@@ -874,8 +928,8 @@ responsive area
         height: 950px;
     }
     .contact {
-        height: 950px;
-        margin-top: -950px;
+        height: 600px;
+        /*margin-top: -950px;*/
     }
     .contact-heading h2 {
         font-size: 50px;
