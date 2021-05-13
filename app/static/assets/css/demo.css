@@ -482,3 +482,20 @@ h1 small{
         margin-top: 130px;
     }
 }
+.left-col {
+    background-color: #417690;
+    box-shadow: -15px 27px 69px rgba(0,0,0,.30);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.right-col {
+    background-color:#79aec8;
+    box-shadow: -15px 27px 69px rgba(0,0,0,.30);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.profile-menu {
+    color:#ffe23b;
+}

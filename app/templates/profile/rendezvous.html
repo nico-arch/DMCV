@@ -65,24 +65,25 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
+        <div class="col-md-12" style="margin-top:80px;"></div>
+      <div class="col-md-3 left-col">
 
         <ul style="list-style: none; padding-top: 150px;">
-          <li> Utilisateur: {{ user.get_username }}</li>
+          <li class="profile-menu"> Utilisateur: {{ user.get_username }}</li>
           <hr>
           <li> <a href="{% url 'profile' %}">Profile</a></li>
           <hr>
           {% if user.is_staff %}
-          <li><a href="{% url 'admin:index' %}">Page Administration</a></li>
+          <li><a class="profile-menu" href="{% url 'admin:index' %}">Page Administration</a></li>
           <hr>
           {% endif %}
 
-          <li><a href="{% url 'profileRendezVous'%}">Rendez-vous</a></li>
+          <li><a class="profile-menu" href="{% url 'profileRendezVous'%}">Rendez-vous</a></li>
           <hr>
-          <li><a href="{% url 'logout'%}">Déconnexion</a></li>
+          <li><a class="profile-menu" href="{% url 'logout'%}">Déconnexion</a></li>
         </ul>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9 right-col">
         <div class="description">
           <h2>Bienvenue {{ user.get_username }} !</h2>
         </div>
@@ -97,7 +98,7 @@
             <button id="alertBtn" class="btn btn-default">Alert</button>
           </div> -->
 
-          <table  class="table-striped table-hover table-sm search-table" width="100%" >
+          <table  class=" table-hover table-sm search-table" width="100%" >
             <thead class="thead-light">
               <th data-field="rendez_vous.date" data-sortable="true">Date des Rendez-Vous</th>
               <th data-field="rendez_vous.Heure" data-sortable="true">Heures</th>

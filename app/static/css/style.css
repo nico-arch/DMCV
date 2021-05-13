@@ -74,7 +74,7 @@ ul.nav {
     padding: 0;
 }
 .navbar-default .navbar-nav>li>a {
-    font-size: 20px;
+    font-size: 17px;
     color: #737373;
     text-transform: uppercase;
     transition: all .7s ease 0s;
@@ -111,7 +111,7 @@ li a.active {
     background: #000 !important;
 }
 .carousel-caption h1 {
-    font-size: 157px;
+    font-size: 70px;
     color: #fff;
     text-transform: uppercase;
     margin-bottom: 0;
@@ -193,7 +193,7 @@ li a.active {
     margin-top: 50px;
 }
 .about h4 {
-    font-size: 20px;
+    font-size: 1.2em;
     color: #737373;
     margin-bottom: 45px;
     text-align: justify !important;
@@ -264,7 +264,7 @@ li a.active {
     margin-top: 0;
 }
 .about-details p {
-    font-size: 13px;
+    font-size: 1.2em;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
     padding: 0 25px;
@@ -360,7 +360,7 @@ li a.active {
     z-index: 999;
 }
 .single-service h3 {
-    font-size: 20px;
+    font-size:1.2em;
     margin-top: 20px;
     color: #fff;
     padding-bottom: 90px;
@@ -459,7 +459,7 @@ li a.active {
     color: #fff;
 }
 .person-detail p {
-    font-size: 13px;
+    font-size: 1.2em;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
 }
@@ -626,7 +626,7 @@ li a.active {
 
 .footer ul li{
     padding-bottom: 10px;
-    font-size: 1.5em;
+    font-size: 1em;
 
 }
 
@@ -662,6 +662,8 @@ li a.active {
 .carousel-inner {
     position: relative;
 }
+
+
 
 /*======================css for carousel=========================*/
 
